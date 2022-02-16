@@ -1,0 +1,111 @@
+<div class="card mb-0 card-offset card-scroll card-spase">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-uppercase" scope="col">Name</th>
+            <th class="text-uppercase" scope="col">Email</th>
+            <th class="text-right">New/In process/Resolved/Discovered</th>
+            <th colspan="10px">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let member of team" class="align-items-center">
+            <th scope="row">{{ member.name }}</th>
+            <td>{{member.email}}</td>
+            <td class="d-flex justify-content-end">
+                <span class="badge badge-warning badge-pill text-uppercase" *ngIf="member.pending else alertCount">pending invitation</span>
+                <ng-template #alertCount>
+                    <div class="d-flex justify-content-end">
+
+                        <span class="badge badge-error badge-pill text-uppercase">{{member.alert}}</span>
+                        <span class="badge badge-secondary badge-pill text-uppercase">{{member.alert}}</span>
+                        <span class="badge badge-info badge-pill text-uppercase">{{member.alert}}</span>
+                        <span class="badge badge-secondary badge-pill text-uppercase">{{member.alert}}</span>
+                    </div>
+                </ng-template>
+            </td>
+            <td>
+                <div class="dropdown-group  dropdown-group-dark">
+
+                    <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <i class="icon fas fa-ellipsis-v"></i> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666892" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                        <a  class="item-link button menu-item" data-toggle="modal" data-target="#ChangeName">
+                            <li class="menu-item">
+                                Change name
+                            </li>
+                        </a>
+                        <a  class="item-link button menu-item " data-toggle="modal" data-target="#AddName">
+                            <li class="menu-item">
+                                Add name
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        
+        </tbody>
+   </table>
+
+   <div class="card-footer d-flex justify-content-between">
+        <div>
+                Cases: 3 new, 1 with action needed, 4 resolved, 150 discovered
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="mr-3">30 active, 1 pending</div>
+            <button class="btn btn-sh-primary" data-toggle="modal" data-target="#AddMembers">Add members...</button>
+        </div>
+   </div>
+</div>
+
+
+<div class="modal fade " id="AddMembers" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" style="min-width: 800px !important; width: 800px !important;">
+        <div class="modal-content border-0" style="min-width: 800px !important; width: 800px !important;">
+            <div style="padding: 32px;">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+                <h1 style="font-weight: bold; font-size: 30px; line-height: 30px;" 
+                    class="font-weight-bold">Invite more members </h1>
+                
+                <p class="text-muted">  Monotonectally develop visionary benefits vis-a-vis granular data. Completely transform bleeding-edge</p>
+
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-uppercase" >Email</label>
+                            <input class="form-control" type="email" placeholder="email address">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-uppercase" >Name (optional)</label>
+                            <input class="form-control" type="text" placeholder="name">
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <a href="#" class="">
+                            <i class="fas fa-minus-circle fa-2x mt-4 pt-3" style="color: #E50C54;"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button class="art__close mt-2" data-dismiss="modal">Cancel</button>               
+                <button class="btn btn-sh-primary mt-2" data-dismiss="modal">Save</button>
+                
+            </div>
+        </div>
+    </div>
+</div>

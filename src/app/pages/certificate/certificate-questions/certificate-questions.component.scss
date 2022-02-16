@@ -1,0 +1,42 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '@imports/variables';
+@import '../certificate.component.mixins';
+
+.certificate-questions {
+  &__title {
+    @include font-desktop();
+    @include font-mobile();
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 30px;
+    }
+    font-weight: normal;
+  }
+}
+
+.certificate-questions-block {
+  &__question,
+  &__answer {
+    @include font-desktop();
+    @include font-mobile();
+    margin: 0;
+    font-weight: normal;
+  }
+
+  &__question {
+    &:not(:first-child) {
+      margin-top: 40px;
+      @include media-breakpoint-down(sm) {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  &__answer {
+    margin-top: 20px;
+    @include media-breakpoint-down(sm) {
+      margin-top: 15px;
+    }
+  }
+}

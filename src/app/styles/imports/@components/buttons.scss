@@ -1,0 +1,66 @@
+@import '@imports/variables';
+@import '@imports/mixins';
+@import 'typography';
+@import '~bootstrap/scss/mixins/hover';
+
+.btn-sh {
+  display: inline-block;
+  font-family: $btn-font-family;
+  font-weight: $btn-font-weight;
+  color: $body-color;
+  text-align: center;
+  white-space: $btn-white-space;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+  border: $btn-border-width solid transparent;
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+  @include transition($btn-transition);
+
+  @include hover() {
+    color: $body-color;
+    text-decoration: none;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: $btn-focus-box-shadow;
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    opacity: $btn-disabled-opacity;
+    @include box-shadow(none);
+  }
+
+  &:not(:disabled):not(.disabled) {
+    cursor: if($enable-pointer-cursor-for-buttons, pointer, null);
+
+    &:active,
+    &.active {
+      @include box-shadow($btn-active-box-shadow);
+
+      &:focus {
+        @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+      }
+    }
+  }
+}
+
+// Future-proof disabling of clicks on `<a>` elements
+a.btn-sh.disabled,
+fieldset:disabled a.btn-sh {
+  pointer-events: none;
+}
+
+.btn-sh-primary {
+  color: $base-font-color-invert;
+  background: $highlight-color;
+  box-shadow: 0 4px 12px transparentize($highlight-blue-color, 0.76);
+  @include hover-focus-active() {
+    color: $base-font-color-invert;
+    background: #1c00a6;
+  }
+}

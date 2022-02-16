@@ -1,0 +1,21 @@
+a {
+    cursor: pointer;
+}
+.join-list__back_offset {
+    margin-bottom: 12px;
+}
+.join-list__wrap {
+    margin-top: 0px;
+}
+.btn-transparent {
+    line-height: 0;
+    min-height: 50px;
+    border: 1px solid #dddeee;
+    color: #666892;
+    transition: all 0.4s ease;
+    background: #fcfdfe;
+    &:hover{
+    color: #1c00a6;
+    border-color: #1c00a6;
+    }
+}

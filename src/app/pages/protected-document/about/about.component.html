@@ -1,0 +1,207 @@
+<div class="card mb-0 card-offset card-spase">
+    <div class="content-wrapper content-wrapper-dark">
+        <div class="scroll-content-y">
+            <div class="about-content">
+                <div class="about-content__list">
+                    <div class="about-content__col">
+                        <div class="about-content__head">
+                            <span>
+                            Full title
+                            </span>
+                        </div>
+                    </div>
+                    <div class="about-content__col">
+                        <div class="about-content__descript">
+                            <p>
+                            {{documento.titulo}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content__list">
+                    <div class="about-content__col">
+                        <div class="about-content__head">
+                            <span>
+                            Current status
+                            </span>
+                        </div>
+                    </div>
+                    <div class="about-content__col">
+                        <div class="about-content__descript">
+                            <p>
+                            {{statusMonitoreo}} {{titleAlerts}} {{titleAlertsActionNeed}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content__list">
+                    <div class="about-content__col">
+                        <div class="about-content__head">
+                            <span> Safelist of websites </span>
+                            <a class="safelist-popover">
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                                <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                <path style="fill:#9FA2B4"
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z">
+                                </path>
+                                </svg>
+                                <div class="safelist-content">
+                                    <div class="link-masked__content">
+                                        <p>We won't consider it a violation if this document appears on such websites</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="about-content__col">
+                        <a (click)="showModalL()" class="about-content__add" style="cursor: pointer">
+                            <i class="circle"></i>
+                            <span> Add safe websites </span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="about-content__list">
+                    <div class="about-content__col">
+                        <div class="about-content__head">
+                            <span> Price </span>
+                            <a class="price-popover">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                                <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                <path style="fill:#9FA2B4"
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z">
+                                </path>
+                                </svg>
+                                <div class="price-content">
+                                    <div class="link-masked__content">
+                                        <p>If you want to request payment for use of this content</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="about-content__col">
+                        <div class="about-content__descript">
+                            <!-- <p>
+                                <span class="bold">US$ 3</span>
+                            </p>
+                            <a >Change...</a>
+                            <a  class="art__close">
+                                <span>
+                                Remove selling option
+                                </span>
+                            </a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-content__list">
+                    <div class="about-content__col">
+                        <div class="about-content__head">
+                            <span>
+                            Draft created
+                            </span>
+                        </div>
+                    </div>
+                    <div class="about-content__col">
+                        <div class="about-content__descript">
+                            <p>
+                                {{ documento.created_at | date:'d MMM y HH:mm' }} UTC+0
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-content__list">
+                    <div class="about-content__col">
+                        <div class="about-content__head">
+                            <span>
+                            Document protected
+                            </span>
+                        </div>
+                    </div>
+                    <div class="about-content__col">
+                        <div class="about-content__descript">
+                            <p>
+                                {{ documento.created_at | date:'d MMM y HH:mm' }} UTC+0
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-content__list" *ngFor="let el of versiones; let i = index">
+                    <div class="about-content__col">
+                        <div class="about-content__head" *ngIf="i==0">
+                            <span>
+                            Document updated
+                            </span>
+                        </div>
+                    </div>
+                    <div class="about-content__col about-content__col_offset">
+                        <div class="about-content_v">
+                            <span> v.{{el.version}} </span>
+                            <span></span>
+                        </div>
+                        <div class="about-content__descript" *ngIf="(el.status === '5' || el.status === '6')">
+                            <p>
+                            {{el.register_dateF}} {{el.register_hourF}} UTC+0 <a class='style-href'
+                                (click)="viewDcoument(el._id)">Document</a>
+                            <a class='style-href' (click)="downloadReport(el._id)">Certificate</a>
+                            </p>
+                        </div>
+                        <div class="about-content__descript" *ngIf="(el.status === '1' || el.status === '2')">
+                            <p>
+
+                            In progress <a (click)="addNewVersion(el._id)">Go to draft</a>
+
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card__bottom-line card__bottom-line_spase">
+
+    <div class="card-wrapper">
+        <div class="btn-wrap">
+        <span>
+            Protected on {{documento.created_at | date:'d MMM y, HH:mm z'}}
+        </span>
+        </div>
+        <div class="card__bottom-line_right">
+        <a href="#" class="linked-pos">
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+            <path d="M0 0h24v24H0V0z" fill="none"></path>
+            <path style="fill:#9FA2B4"
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z">
+            </path>
+            </svg>
+
+            <div class="links-masked">
+                <div class="link-masked__content">
+                    <p>
+                        You can add an updated version of this document 
+                    </p>
+                </div>
+            </div>
+
+        </a>
+        <span class="card__bottom-line_desc">
+            v.{{documento.version}}
+        </span>
+
+        <button [routerLink]="['/draft', documento.uuid]"
+            class="btn btn-primary btn-block btn-table ">Update new version</button>
+        </div>
+    </div>
+
+    </div>
+
+</div>
+<app-modal-safe-list></app-modal-safe-list>

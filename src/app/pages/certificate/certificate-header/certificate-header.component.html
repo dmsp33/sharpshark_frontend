@@ -1,0 +1,35 @@
+<header class="certificate-header">
+    <div class="row">
+        <div class="certificate-header__logo col-12 cols-sm-12 col-md-4 col-lg-4">
+            <div class="certificate-header-logo d-none d-md-block">
+                <img src="assets/images/sert/content.svg">
+                <img src="assets/images/sert/logo.svg" class="certificate-header-logo__float">
+            </div>
+            <a class="d-md-none">
+                <img src="assets/images/logo-m.svg">
+            </a>
+        </div>
+
+        <div class="certificate-header__text col-12 cols-sm-12 col-md-4 col-lg-4">
+            <div class="certificate-header__description">
+                {{ 'certificate.content_existed_declared_time' | translatePart:0 }}
+                <a href="https://sharpshark.io/#faq" class="sh-link sh-link--underlined">
+                    {{ 'certificate.content_existed_declared_time' | translatePart:1 }}
+                </a>
+            </div>
+        </div>
+
+        <div class="certificate-header__text col-12 cols-sm-12 col-md-4 col-lg-4">
+            <div class="certificate-header__description">
+                <span>{{ 'certificate.quote_content' | translatePart:0 }}
+                    <a [bTooltip]="'common.copy_link' | translate" [placement]="'bottom'" [shCopy]="urlIpfs"
+                       href="#" class="sh-link sh-link--underlined">
+                        {{ 'certificate.quote_content' | translatePart:1 }}
+                        <sh-icon [name]="'custom:copy-link'" [size]="15"></sh-icon>
+                    </a>
+                    {{ 'certificate.quote_content' | translatePart:2 }}
+                </span>
+            </div>
+        </div>
+    </div>
+</header>

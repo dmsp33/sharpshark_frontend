@@ -1,0 +1,29 @@
+@import '@imports/variables';
+@import '@imports/mixins';
+@import 'typography';
+@import '~bootstrap/scss/mixins/hover';
+
+input[type=radio] {
+  &.radio-sh {
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    border: solid 1px $highlight-light-faded-color;
+
+    &:hover,
+    &:focus {
+      border-color: darken($highlight-light-faded-color, 15%);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px lighten($highlight-light-faded-color, 30%);
+    }
+
+    &:checked {
+      border: solid 1px $highlight-blue-color-1;
+      background: radial-gradient(circle, $highlight-blue-color-1 0%, $highlight-blue-color-1 49%, transparent 50%, transparent 100%)
+    }
+  }
+}

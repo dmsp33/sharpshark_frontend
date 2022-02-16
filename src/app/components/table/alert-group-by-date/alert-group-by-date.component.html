@@ -1,0 +1,127 @@
+<ng-template [ngIf]="data.length">        
+    <tr class="table-row table-gray">
+        <td class="row-item"></td>
+        <td class="row-item"></td>
+        <td class="row-item">SEEN {{group.toUpperCase().replace('_', ' ')}}</td>
+    </tr>
+    <ng-container *ngFor="let documento of data; let i = index">
+        <!-- Con una alerta -->
+        <ng-template [ngIf]="documento.length == 1">
+            <tr class="table-row">
+                <td class="row-item row-over">
+                    <p>
+                        <span class="bold">{{documento[0].title}}</span>
+                        {{documento[0].content }}
+                    </p>
+                </td>
+                <td class="row-item">
+                    <span>{{documento[0].updated_at | date:'dd MMM YYYY HH:mm'}}</span>
+                </td>
+                <td class="row-item dropdown">
+                    <div class="dropdown-group dropdown-group-dark">
+                    <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="icon fas fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                        <a [routerLink]="['/draft', documento.uuid]" class="item-link button menu-item">
+                        <li class="menu-item">
+                            View my document
+                        </li>
+                        </a>
+                        <li class="menu-item">
+                        <a href="{{documento[0].url}}" class="item-link button menu-item" target="_blank">Go to page</a>
+                        </li>
+                        <a [routerLink]="['/certificate', documento[0].uuid]" target="_blank" 
+                        class="item-link button menu-item">
+                        <li class="menu-item">
+                            View certificate
+                        </li>
+                        </a>
+                        <a  class="item-link button menu-item">
+                        <li class="menu-item">
+                            Add site to safelist
+                        </li>
+                        </a>
+                        <a  class="item-link item-link_red button menu-item text-danger"
+                        (click)="changeActualStatus(documento[0], group)">
+                        <li class="menu-item">
+                            Move to not actual
+                        </li>
+                        </a>
+                    </ul>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+
+        <!-- con mas de una alerta -->
+        <ng-template [ngIf]="documento.length > 1">
+            <tr class="table-row table-parent">
+                <td class="row-item row-over row-trigger" colspan="3">
+                    <div class="row-item__wrapper text-align-wrapper">
+                        <a class="table-arrow">
+                            <span></span>
+                        </a>
+                        <span class="badge rounded badge-error">{{ documento.length  }}</span>
+                        <p>
+                            <span class="bold">{{documento[0].title}}</span>
+                            {{documento[0].content }}
+                        </p>
+                    </div>
+                </td>
+            </tr>
+                <tr *ngFor="let page of documento" class="table-row table-row__widget">
+                <td class="row-item row-over" colspan="2">
+                    <div class="row-item__wrapper text-align-wrapper">
+                    <p>
+                        <a [href]="page.url" target="_blank">{{page.url}}</a>
+                    </p>
+                    </div>
+                </td>
+                <td class="row-item dropdown">
+                    <div class="vertical-m btns">
+
+                        <div class="vertical-m__right" >
+                            <button
+                            class="btn btn-primary btn-table">React...</button>
+
+                            <a class="art__resume">Skip</a>
+                        </div>
+
+                        <div class="dropdown-group dropdown-group-dark">
+                            <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="icon fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                                <li class="menu-item">
+                                    <a class="item-link">View my document</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a  class="item-link" target="_blank">Go to page</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="item-link item-link_red">View certificate</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="item-link item-link_red">Add site to safelist</a>
+                                </li> 
+
+                                <li class="menu-item">
+                                    <a class="item-link item-link_red">Move to seen</a>
+                                </li>
+                                <a class="item-link item-link_red"
+                                (click)="changeActualStatus(page, group)">
+                                    <li class="menu-item">Move to not actual</li>
+                                </a>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </td>
+            </tr>
+        </ng-template>
+    </ng-container>
+</ng-template>

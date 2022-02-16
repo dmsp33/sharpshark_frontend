@@ -1,0 +1,45 @@
+@use 'sass:color';
+@import '@imports/variables';
+@import '~bootstrap/scss/mixins/hover';
+
+
+$background_hover: #253dd9;
+$text-color_hover: #fff;
+$background: $base-font-color-invert;
+$border-color: #dddeee;
+$text-color: #666892;
+
+.filter-tab {
+  padding: 4px 12px;
+  min-height: unset;
+  color: $text-color;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-transform: uppercase;
+  background-color: $background;
+  border: solid 1px $border-color;
+  border-radius: 4px;
+
+  @include hover-focus-active() {
+    &:not(:disabled) {
+      color: $text-color_hover !important;
+      background-color: $background_hover !important;
+      border-color: $text-color !important;
+    }
+  }
+
+  &:disabled {
+    color: $background;
+    background-color: $text-color;
+    border-color: $text-color;
+    cursor: default;
+  }
+}
+
+
+
+
+.text-align-wrapper{
+  justify-content:left;
+}

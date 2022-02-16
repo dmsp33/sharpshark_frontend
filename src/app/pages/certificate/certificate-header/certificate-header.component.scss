@@ -1,0 +1,64 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '@imports/variables';
+@import '../certificate.component.mixins';
+
+$narrow-line-thickness: 2px;
+$bold-line-thickness: 6px;
+$distance-between-lines: 4px;
+
+.certificate-header {
+  position: relative;
+  padding-top: 25px;
+  padding-bottom: $bold-line-thickness;
+
+  &__logo {
+    margin-bottom: 25px;
+    @include media-breakpoint-down(sm) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .certificate-header-logo {
+      &__float {
+        left: 0;
+        position: absolute;
+        transform: translate(-100%, 0);
+        @include max-width-copyright-block() {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__text {
+    margin-bottom: 25px;
+  }
+
+  &__description {
+    @include font-desktop();
+    @include font-mobile();
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 99999999px;
+    background: $base-font-color;
+  }
+
+  &:before {
+    bottom: 0;
+    height: $bold-line-thickness;
+  }
+
+  &:after {
+    bottom: -($distance-between-lines + $narrow-line-thickness);
+    height: $narrow-line-thickness;
+  }
+}

@@ -1,0 +1,14 @@
+@import '../@imports/variables';
+@import '../@imports/mixins';
+
+.qr-code {
+  &--hoverable {
+    outline: solid 1px transparent;
+    outline-offset: 2px;
+
+    &:hover {
+      @include transition(outline-color);
+      outline-color: $highlight-color;
+    }
+  }
+}

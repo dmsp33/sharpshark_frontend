@@ -1,0 +1,21 @@
+@import 'variables';
+
+@mixin icon-color($color) {
+  .sh-icon {
+    color: $color;
+
+    .sh-icon__element {
+      &--stroked {
+        stroke: $color;
+      }
+
+      &--filled {
+        fill: $color;
+      }
+    }
+  }
+}
+
+@mixin transition($props: all) {
+  transition: $props 0.4s ease;
+}

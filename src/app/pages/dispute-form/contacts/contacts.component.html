@@ -1,0 +1,101 @@
+<div class="card mb-0 card-offset card-spase">
+    <form [formGroup]="contactFormGroup" novalidate>
+        <div class="content-wrapper content-wrapper-dark">
+            <div class="scroll-content-y overflow-y-auto contacts-content">
+                <div class="row">
+                    <div class="col-8">
+                        <h2 class="title">Step 3. Sending the claim to the website owner</h2>
+
+                        <!-- via email -->
+                        <div class="mb-27">
+                            <div class="form-check mb-16">
+                                <input class="form-check-input" type="radio" name="contact_type" id="contact_type" value="email" formControlName="contact_type"
+                                    (change)="ChangeContactType.emit('email')">
+                                <label class="form-check-label" for="contact_type">
+                                    By email
+                                </label>
+                            </div>
+                            <div class="title2 text-uppercase">contact email</div>
+                            <p class="info">
+                                Go to the contact section, view cookies and privacy policy, check the website on 
+                                <a href="" class="link">whois.com</a>, or check their social media profiles. <a href="" class="link">More tips on how to find contacts</a>
+                            </p>
+                            <div class="mb-21" formArrayName="email">
+                                <div *ngFor="let emailItem of email.controls; let i=index" class="mb-3">
+                                    <div class="row align-items-center mb-8">
+                                        <div class="col pr-0">
+                                            <input type="text" id="emailItem-{{i}}" [formControlName]="i" class="form-control">
+                                        </div>
+                                        <div class="col-1 pl-2 text-right" *ngIf="i>0">
+                                            <a class="" (click)="removeEmail(i)"><i class="btn-delete fas fa-minus-circle fa-2x"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-evidence" type="button"
+                                    (click)="addEmail()">
+                                    <i class="fas fa-plus-circle"></i> Add more
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- via form -->
+                        <div class="mb-27">
+                            <div class="form-check mb-16">
+                                <input class="form-check-input" type="radio" name="contact_type" id="formContact" value="form" formControlName="contact_type"
+                                    (change)="ChangeContactType.emit('form')">
+                                <label class="form-check-label" for="formContact">
+                                    Via form
+                                </label>
+                            </div>
+                            <div class="title2 text-uppercase">contact email</div>
+                            <p class="info">
+                                If they hid their email but have a contact form, send the text of the claim there and let us know.
+                            </p>
+                            <div class="d-flex">
+                                <button class="btn btn-outline-white btn-evidence" disabled>
+                                    <i class="fas fa-download"></i> Download .pdf
+                                </button>
+                                <button class="btn btn-outline-primary btn-evidence" ngxClipboard [cbContent]="claim" (click)="copied()">
+                                    <i class="fas fa-copy"></i> Copy the claim’s text 
+                                </button>
+                                <div class="art__load ml-4 text-capitalize copy-alert" role="alert"
+                                *ngIf="copy">
+                                    Copied!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nothing found -->
+                        <div class="mb-27">
+                            <div class="form-check mb-16">
+                                <input class="form-check-input" type="radio" name="contact_type" id="nothingContent" value="nothing" formControlName="contact_type"
+                                    (change)="ChangeContactType.emit('nothing')">
+                                <label class="form-check-label" for="nothingContent">
+                                    Nothing found
+                                </label>
+                            </div>
+                            <p class="info">
+                                Sometimes it happens. So, make sure you’ve tried everything below and let us know — we will prepare an immediate claim for the provider.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card__bottom-line card__bottom-line_spase">
+            <div class="card-wrapper">
+                <div class="btn-wrap">
+                    <span>
+                        Document “Document long title, this is it’s long, long, very long title”
+                    </span>
+                </div>
+                <div class="card__bottom-line_right">
+                    <button class="btn btn-primary btn-block btn-table"
+                        (click)="saveContactInfo()"
+                        [disabled]="contactFormGroup.invalid">Send the claim!</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

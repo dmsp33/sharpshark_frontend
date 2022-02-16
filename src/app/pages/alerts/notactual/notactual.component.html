@@ -1,0 +1,39 @@
+  <div class="card mb-0 card-offset card-scroll card-spase">
+    <table id="dinamicData" class="table table-mob-alert" style="min-height: 100%">
+
+        <thead class="table-head">
+          <tr>
+            <th> {{'table.your_document_title' | translate }}</th>
+            <th> {{'table.appeared_on' | translate }}</th>
+            <th> {{'table.discovered' | translate }}</th>
+          </tr>
+        </thead>
+  
+  
+        <tbody class="table-body">
+          <tr class="table-row table-row_border-none" *ngIf="totalAlerts==0">
+            <td class="row-item row-over">
+              <p>
+                <!-- This is a blank page... Cases will appear here  -->
+                {{'table.this_a_blank_page' | translate}}
+              </p>
+            </td>
+            <td class="row-item"></td>
+            <td class="row-item dropdown"></td>
+          </tr>
+
+          
+          <!-- Today  -->
+          <alert-notactual-group-by-date [data]="dataToday" [group]="'today'" (changeStatus)="changeActualStatus($event)"></alert-notactual-group-by-date>
+
+          <!-- Earlier this week  -->
+          <alert-notactual-group-by-date [data]="dataWeek" [group]="'week'" (changeStatus)="changeActualStatus($event)"></alert-notactual-group-by-date>
+
+          <!-- Earlier this month  -->
+          <alert-notactual-group-by-date [data]="dataMonth" [group]="'month'" (changeStatus)="changeActualStatus($event)"></alert-notactual-group-by-date>
+
+          <!-- Even Earlier   -->
+          <alert-notactual-group-by-date [data]="dataEvenEarlier" [group]="'even_earlier'" (changeStatus)="changeActualStatus($event)"></alert-notactual-group-by-date>
+        </tbody>
+      </table>
+    </div>

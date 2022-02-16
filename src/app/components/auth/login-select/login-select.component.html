@@ -1,0 +1,74 @@
+<div class="modal fade " id="myModal1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content ">
+            <div id="alertaActivacion" class="alert alert-dismissable info info__item info__item_offset-bot info__item_green info__item_width" style="margin: auto;margin-bottom: -1rem;z-index: 20; display: none;">
+                <div class="info__left">
+                    <i class="fas fa-check"></i>
+                    <span>
+                        translate.response.lbl_create03
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="page" *ngIf="step == 1" id="quitateVale">
+                <div class="page-form">
+                    <div class="card auth-form auto-form__space mb-0">
+                        <div class="join-list__back join-list__back_offset">
+                            <a (click)="hideModal()" class="action-wrap__back mouse-hover">
+                                <span class="arrow">
+                                    <svg class="icons icons_arr-back">
+                                        <use xlink:href="assets/images/icons.svg#arr-back">
+                                        </use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    {{'msgGeneric.btn_back'| translate}}
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="join-list__wrap">
+                            <h2 class="join-list__title">
+                                {{ 'auth.sign_in_to' | translate }} <br> SharpShark
+                            </h2>
+
+                            <a href="#" class="join-list__logo">
+                                <img src="assets/images/sert/logo.svg" alt="">
+                            </a>
+                        </div>
+
+                        <div class="join-list__descript join-list-descript">
+                            <span class="join-list-descript_gray ">
+                                {{ 'auth.user_your_associated_email_or_google_account' | translate }}
+                            </span>
+                        </div>
+
+                        <form class="form-wrap join-form">
+                            <button (click)="steps(2)" type="submit" class="btn btn-primary btn-block">{{'auth.btn_sig_in' | translate}} via Email</button>
+                            <button (click)="authenticate()" type="submit" class="btn btn-danger">{{'auth.btn_sig_in' | translate}} via Google</button>
+
+                        </form>
+
+                        <div class="auto-form__list auto-form__list_offset">
+                            <div class="help-wrap">
+                                {{ 'auth.dont_have_account' | translate }}
+                                <a (click)="steps(3)" class="fw-fw-semi-bold">
+                                    <span>{{ 'auth.sign_up' | translate }}</span>
+                                </a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <app-login-email (upStep)="updateSteps($event)" (signInWithGoogle)="authenticate()" [step]="step" [method]="hideModal"></app-login-email>
+            <app-signup (upStep)="updateSteps($event)" [step]="step" (signInWithGoogle)="authenticate()"></app-signup>
+            <app-login-recover-password (upStep)="updateSteps($event)" [step]="step"></app-login-recover-password>
+            <app-terms-conditions [step]="step"></app-terms-conditions>
+        </div>
+    </div>
+</div>
+<app-onboarding></app-onboarding>

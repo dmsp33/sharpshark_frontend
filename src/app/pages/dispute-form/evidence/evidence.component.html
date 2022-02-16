@@ -1,0 +1,260 @@
+<div class="card mb-0 card-offset card-spase">
+    <form [formGroup]="evidenceFormGroup" novalidate (ngSubmit)="onSubmit()">
+        <div class="content-wrapper content-wrapper-dark">
+            <div class="scroll-content-y overflow-y-auto evidence-content">
+                <div class="row">
+                    <div class="col-8">
+
+                        <h2 class="title">Step 1. Collecting evidence</h2>
+                        <!-- Recipient -->
+                        <div>
+                            <h3 class="title">Recipient</h3>
+                            <div class="mb-27">
+                                <div class="title2 text-uppercase">who this claim is for</div>
+                                <p class="info">
+                                    The first claim should be sent to the website owner. 
+                                    <a href="" class="link">Why?</a> But if they ignore it, you can later send it to the provider or/and search engine
+                                </p>
+                                <input class="form-control h" formControlName="claim_for"  [attr.disabled]="true"/>
+                                <!-- <select class="custom-select" disabled>
+                                    <option selected>Website owner</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select> -->
+                            </div>
+                            <div class="mb-16">
+                                <div class="title2 text-uppercase">their jurisdiction</div>
+                                <p class="info">
+                                    We auto-detected the country they host their website. But if you want, you can change it
+                                </p>
+                                <input class="form-control h" formControlName="jurisdiction"  [attr.disabled]="true"/>
+                                <!-- <select class="custom-select" >
+                                    <option selected>Malta</option>
+                                </select> -->
+                            </div>
+                        </div>
+            
+                        <!-- Case details -->
+                        <div>
+                            <h3 class="title">Case details</h3>
+                            <div class="mb-27">
+                                <div class="title2 text-uppercase">Time of case discovery</div>
+                                <input class="form-control h" formControlName="discovered"  [attr.disabled]="true">
+                            </div>
+                            <div class="mb-21">
+                                <div class="title2 text-uppercase">Screenshots of the publication in question</div>
+                                <p class="info">
+                                    Capture and attach it below. Make sure that the date, time, and website URL are clearly visible/clear and visible in the image
+                                </p>
+                                <button class="btn btn-outline-secondary btn-evidence" type="button" (click)="screenshot.click()"
+                                    [ngClass]="{'d-none': f.screenshot.value, 'd-block': !f.screenshot.value}">
+                                    <i class="fas fa-plus-circle"></i> Add a screenshot
+                                </button>
+                                <input #screenshot type="file" (change)="onFileInputScreenshot($event)" 
+                                    accept="image/*" class="form-control h" [ngClass]="{'d-none': !f.screenshot.value, 'd-block': f.screenshot.value}"/>
+                            </div>
+                            <div class="mb-21" formArrayName="in_question">
+                                <div class="title2 text-uppercase">Link to the publication in question</div>
+                                <div *ngFor="let inQuestionItem of in_question.controls; let i=index" class="mb-3">
+                                    <div class="row align-items-center mb-8">
+                                        <div class="col pr-0">
+                                            <input type="text" id="inQuestionItem-{{i}}" [formControlName]="i" class="form-control">
+                                        </div>
+                                        <div class="col-1 pl-0 text-right">
+                                            <a class="" (click)="removeInQuestion(i)"><i class="btn-delete fas fa-minus-circle fa-2x"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-evidence" type="button"
+                                    (click)="addInQuestion()">
+                                    <i class="fas fa-plus-circle"></i> Add more
+                                </button>
+                            </div>
+
+                            <div class="mb-21" formArrayName="in_question_web_archive">
+                                <div class="title2 text-uppercase">Publication in question on Web archive</div>
+                                <p class="info mb-8">
+                                    This is important. Go to <a href="web.archive.org" class="link">web.archive.org</a>, paste the website URL and find a page with the publication. Search carefully, it’s chaotic there.
+                                </p>
+                                <div *ngFor="let in_question_web_archive of in_question_web_archive.controls; let i=index" class="mb-3">
+                                    <div class="row align-items-center mb-8">
+                                        <div class="col pr-0">
+                                            <input type="text" [formControlName]="i" class="form-control">
+                                        </div>
+                                        <div class="col-1 pl-0 text-right" *ngIf="i>0">
+                                            <a class="" (click)="removeInQuestionWebArchive(i)"><i class="btn-delete fas fa-minus-circle fa-2x"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-evidence mb-8" type="button"
+                                    (click)="addInQuestionWebArchive()" [disabled]="in_question_web_archive.length == 0">
+                                    <i class="fas fa-plus-circle"></i> Add more
+                                </button>
+                                <div class="form-check mb-16">
+                                    <input class="form-check-input" type="checkbox" value="" id="failedFindWebArchive"
+                                        (click)="f.in_question_web_archive.reset();">
+                                    <label class="form-check-label" for="failedFindWebArchive">
+                                        I failed to find it on Web archive
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Your demands -->
+                        <div>
+                            <h3 class="title">Your demands</h3>
+                            <div class="mb-27">
+                                <div class="form-check mb-16">
+                                    <input class="form-check-input" type="radio" formControlName="remove_content" id="removeContent" [value]="1"
+                                        [checked]="f.remove_content" (change)="disabledRemoveOrPay()">
+                                    <label class="form-check-label" for="removeContent">
+                                        Ask to remove the content
+                                    </label>
+                                </div>
+                                <div class="form-check mb-16">
+                                    <input class="form-check-input" type="radio" formControlName="remove_content" id="removeOrPaidContent" [value]="0"
+                                        [checked]="f.remove_content" (change)="disabledRemoveOrPay()">
+                                    <label class="form-check-label" for="removeOrPaidContent">
+                                        Request to either remove or pay and give you credit
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 offset-1">
+                                        <div class="form-check mb-16">
+                                            <input class="form-check-input" type="checkbox" [value]="1" id="authorShipCheckbox" checked 
+                                                formControlName="acknowledge">
+                                            <label class="form-check-label" for="authorShipCheckbox">
+                                                Ask to acknowledge your authorship and include 
+                                                a source link
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 offset-1">
+                                        <div class="form-check mb-16">
+                                            <input class="form-check-input" type="checkbox" [value]="1" id="askPayCheckbox" checked
+                                                formControlName="pay_for_use" >
+                                            <label class="form-check-label" for="askPayCheckbox">
+                                                Ask to pay you for using the content
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 offset-1">
+                                        <div class="input-group amount">
+                                            <input type="text" class="form-control h" placeholder="Amount" 
+                                                formControlName="amount">
+                                            <div class="input-group-append">
+                                                <button class="btn dropdown-toggle btn-amount" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                disabled>USD$</button>
+                                                <!-- <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                    <div role="separator" class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Separated link</a>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 offset-1 mb-8">
+                                        <a href="" target="_blank">
+                                            <span class="text-underline mr-2">How to set a fair price?</span>
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="form-check mb-16">
+                                    <input class="form-check-input" type="checkbox" id="defalutConditions" [value]="1"
+                                        formControlName="conditions_default" (change)="disabledRemoveOrPay()">
+                                    <label class="form-check-label" for="defalutConditions">
+                                        Make conditions default for this document
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Your proofs -->
+                        <div>
+                            <h3 class="title">Your proofs</h3>
+                            <div class="mb-16">
+                                <div class="title2 text-uppercase">certificate of authorship</div>
+                                <input type="text" class="form-control" formControlName="certificate_authorship">
+                            </div>
+                            <div class="mb-16" formArrayName="your_publication">
+                                <div class="title2 text-uppercase">link to your publication </div>
+                                <div *ngFor="let your_publication of your_publication.controls; let i=index" class="mb-3">
+                                    <div class="row align-items-center mb-8">
+                                        <div class="col pr-0">
+                                            <input type="text" [formControlName]="i" class="form-control">
+                                        </div>
+                                        <div class="col-1 pl-0 text-right" *ngIf="i>0">
+                                            <a class="" (click)="removeYourPublication(i)"><i class="btn-delete fas fa-minus-circle fa-2x"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-evidence" type="button"
+                                    (click)="addYourPublication()">
+                                    <i class="fas fa-plus-circle"></i> Add more
+                                </button>
+                            </div>
+                            <div class="mb-26" formArrayName="your_web_archive">
+                                <div class="title2 text-uppercase">Link to your publication on Web archive</div>
+                                <p class="info">
+                                    Again, go to <a href="" class="link">webarchive.org</a>, paste your website URL and find the page with your publication
+                                </p>
+                                <div *ngFor="let your_web_archive of your_web_archive.controls; let i=index" class="mb-3">
+                                    <div class="row align-items-center mb-8">
+                                        <div class="col pr-0">
+                                            <input type="text" [formControlName]="i" class="form-control">
+                                        </div>
+                                        <div class="col-1 pl-0 text-right" *ngIf="i>0">
+                                            <a class="" (click)="removeYourWebArchive(i)"><i class="btn-delete fas fa-minus-circle fa-2x"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-outline-secondary btn-evidence mb-8"
+                                    (click)="addYourWebArchive()" type="button">
+                                    <i class="fas fa-plus-circle"></i> Add more
+                                </button>
+                            </div>
+                            <div class="form-check mb-16">
+                                <!-- <input class="form-check-input" type="checkbox" value="" id="failedFindWebArchive">
+                                <label class="form-check-label" for="failedFindWebArchive">
+                                    I failed to find it on Web archive
+                                </label> -->
+                            </div>
+                            <div class="mb-16">
+                                <div class="title2 text-uppercase">Screenshots of your drafts (optional)</div>
+                                <p class="info">Should you have any proof that you worked on this content, capture and add it below. It can be the history of edits in your Google doc, paper drafts, etc.</p>
+                                <button class="btn btn-outline-secondary btn-evidence mb-8" type="button" (click)="screenshotDraft.click()"
+                                    [ngClass]="{'d-none': f.screenshot_draft.value, 'd-block': !f.screenshot_draft.value}">
+                                    <i class="fas fa-plus-circle"></i> Add screenshot
+                                </button>
+                                <input #screenshotDraft type="file" (change)="onFileInputScreenshotDraft($event)" class="form-control h"
+                                    accept="image/*" [ngClass]="{'d-none': !f.screenshot_draft.value, 'd-block': f.screenshot_draft.value}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card__bottom-line card__bottom-line_spase">
+            <div class="card-wrapper">
+                <div class="btn-wrap">
+                    <span>
+                        Document “Document long title, this is it’s long, long, very long title”
+                    </span>
+                </div>
+                <div class="card__bottom-line_right">
+                    <button class="btn btn-primary btn-block btn-table"
+                        type="submit" [disabled]="evidenceFormGroup.invalid"
+                        (click)="onSubmit()">Generate claim & proceed</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

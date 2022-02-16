@@ -1,0 +1,232 @@
+<div class="page" *ngIf="step == 3">
+    <div class="page-form">
+        <div class="card auth-form auto-form__space mb-0">
+            <div class="join-list__back join-list__back_offset">
+                <a (click)="onUpSteps(1)" class="action-wrap__back"
+                    *ngIf="letsMeet">
+                    <span class="arrow">
+                        <svg class="icons icons_arr-back">
+                            <use xlink:href="assets/images/icons.svg#arr-back">
+                            </use>
+                        </svg>
+                    </span>
+                    <span>
+                        {{'msgGeneric.btn_back'| translate}}
+                    </span>
+                </a>
+
+                <a (click)="letsMeet = !letsMeet" class="action-wrap__back"
+                    *ngIf="!letsMeet">
+                    <span class="arrow">
+                        <svg class="icons icons_arr-back">
+                            <use xlink:href="assets/images/icons.svg#arr-back">
+                            </use>
+                        </svg>
+                    </span>
+                    <span>
+                        {{'msgGeneric.btn_back'| translate}}
+                    </span>
+                </a>
+                <a *ngIf="!letsMeet" href="#" class="join-list__logo join-list__logo_low">
+                    <img src="assets/images/sert/logo.svg" alt="">
+                </a>
+            </div>
+
+            <div *ngIf="letsMeet">
+                <div class="join-list__wrap">
+                    <h2 class="join-list__title">
+                        {{ 'auth.sign_up_to' | translate }}  <br> SharpShark
+                    </h2>
+
+                    <a href="#" class="join-list__logo">
+                        <img src="assets/images/sert/logo.svg" alt="">
+                    </a>
+                </div>
+
+                <div class="join-list__descript join-list-descript">
+                    <span class="join-list-descript_gray join-list-descript_offset-bottom">
+                        <!-- First, let’s meet  -->
+                        {{ 'auth.lets_meet' | translate }}
+                    </span>
+                    <span class="join-list-descript_dark">
+                        <!-- you are...  -->
+                        {{ 'auth.you_are' | translate }}
+                    </span>
+                </div>
+
+                <form class="form-wrap join-form">
+                    <button type="submit" (click)="ocultarLetsMeet('team')" [disabled]="terminosYCondiciones"
+                        class="btn btn-transparent">
+                        <!-- Head of team -->
+                        {{ 'auth.head_of_team' | translate }}
+                    </button>
+                    <button type="submit" (click)="ocultarLetsMeet('individual')" [disabled]="terminosYCondiciones"
+                        class="btn btn-primary">
+                        <!-- Individual -->
+                        {{ 'auth.individual' | translate }}
+                    </button>
+
+                    <!-- <div class="join-form join-form_offset-top">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" 
+                                id="cheking"
+                                (change)="aceptarTerminosYCondiciones()" 
+                                [checked]="terminosYCondiciones">
+                            <label class="custom-control-label" for="cheking">
+                                {{ 'auth.i_agree_with' | translate }} <a (click)="showTermsConditions">{{ 'auth.terms_and_conditions' | translate }}</a>
+                            </label>
+                        </div>
+                    </div> -->
+
+                </form>
+
+                <div class="auto-form__list auto-form__list_offset">
+                    <div class="help-wrap">
+                        <!-- Already have an account? -->
+                        {{ 'auth.already_have_account' | translate }}
+                        <a (click)="onUpSteps(1)" class="fw-fw-semi-bold"><span>
+                                <!-- Sign in -->
+                                {{ 'auth.sign_in' | translate }}
+                            </span
+                        ></a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngIf="!letsMeet">
+                <div *ngIf="hayUnErrorConLosDatos"
+                    class="alert alert-dismissable info info__item info__item_offset-bot info__item_red info__item_width"
+                    style="min-width: calc(390px - 2.21429rem * 2) !important; max-width: calc(390px - 2.21429rem * 2) !important">
+                    <span>{{errorConLosDatos}}</span>
+                </div>
+
+                <form class="form-wrap join-form" [formGroup]="signUpForm" (submit)="sendFormSignUp()">
+                    <div class="form-group">
+                        <label class="label-text">{{ 'registerUser.complete_name' | translate }}</label>
+                        <input (blur)="comprobarNombre()" required formControlName="author_name" id="author_name"
+                            type="text" class="form-control label-toggle"
+                            placeholder="{{ 'registerUser.complete_name' | translate }}" minlength="7"
+                            maxlength="50">
+                    </div>
+                    <div *ngIf="isValidInputAuthorName"
+                        class="alert alert-dismissable info info__item info__item_offset-bot info__item_red info__item_width"
+                        style="min-width: calc(390px - 2.21429rem * 2) !important; max-width: calc(390px - 2.21429rem * 2) !important">
+                        <div *ngIf="signUpForm.controls['author_name'].errors && signUpForm.controls['author_name'].errors.required">
+                            <!-- Required field -->
+                            {{ 'msgGeneric.msg_required_field' | translate }}
+                        </div>
+                        <div *ngIf="signUpForm.controls['author_name'].errors && signUpForm.controls['author_name'].errors.minlength">
+                            <!-- Think of name more secure  -->
+                            {{ 'msgGeneric.maxlenght_invalid' | translate }}
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-text">{{letsMeetEmail}}</label>
+                        <input required (blur)="comprobarUsuario()" formControlName="email" id="email" type="email"
+                            class="form-control label-toggle"
+                            placeholder="{{ 'registerUser.email_example' | translate }}" minlength="7"
+                            maxlength="50">
+                    </div>
+                    <div *ngIf="isValidInputUser"
+                        class="alert alert-dismissable info info__item info__item_offset-bot info__item_red info__item_width"
+                        style="min-width: calc(390px - 2.21429rem * 2) !important; max-width: calc(390px - 2.21429rem * 2) !important">
+                        <!-- Hmm, make sure this email is correct  -->
+                        {{ 'msgGeneric.email_invalid' | translate }}
+                    </div>
+
+                    <div class="form-group with-suffix-icon">
+                        <label class="label-text">{{ 'auth.create_and_repeat_password' | translate }}</label>
+                        <label class="label-text label-text__reminder">
+                            <!-- 8 latin characters with numbers & symbols  -->
+                            {{ 'auth.latin_characters_with_numbers_and_symbols' | translate }}
+                        </label>
+                        <div class="input-icons">
+                            <input (blur)="comprobarClave()" required formControlName="password" id="password"
+                                [type]="fieldTextType1 ? 'text' : 'password'"
+                                class="form-control form-control-border-top label-toggle"
+                                placeholder="{{ 'auth.your_password' | translate }}">
+                            <a href="#" class="suffix-icon" (click)="toggleFieldTextType1()">
+                                <img *ngIf="!fieldTextType1" src="assets/images/eye.svg" alt="">
+                                <img *ngIf="fieldTextType1" src="assets/images/eye-open.svg" alt="">
+                            </a>
+
+                            <a href="#" class="icon-backspase" (click)="borrarCampo()">
+                                <svg class="icons icons_backspase-r">
+                                    <use xlink:href="assets/images/icons.svg#backspase-r">
+                                    </use>
+                                </svg>
+                            </a>
+                        </div>
+                        <input (keyup)="comprobarClave()" required formControlName="repeat_password"
+                            id="repeat_password" [type]="fieldTextType1 ? 'text' : 'password'"
+                            class="form-control form-control-border-bottom label-toggle"
+                            placeholder="{{'registerUser.repeat_password' | translate}}" minlength="7" maxlength="12">
+                    </div>
+
+                    <div *ngIf="isValidInputPassword"
+                        class="alert alert-dismissable info info__item info__item_offset-bot info__item_red info__item_width"
+                        style="min-width: calc(390px - 2.21429rem * 2) !important; max-width: calc(390px - 2.21429rem * 2) !important">
+                        <!-- Think of password more secure  -->
+                        {{'msgGeneric.think_password_more_secure' | translate}}
+                    </div>
+
+                    <div *ngIf="isValidInputPasswordConfirm && !isValidInputPassword"
+                        class="alert alert-dismissable info info__item info__item_offset-bot info__item_red info__item_width"
+                        style="min-width: calc(390px - 2.21429rem * 2) !important; max-width: calc(390px - 2.21429rem * 2) !important">
+                        <!-- Password doesnt match -->
+                        {{'msgGeneric.password_doesnt_match' | translate}}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">{{ 'auth.sign_up' | translate }}</button>
+                    <span (click)="onSignInWithGoogle()" class="btn btn-danger">{{ 'auth.use_google_id_instead' | translate }}</span>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page" *ngIf="step == 4">
+    <div class="page-form">
+        <div class="card auth-form auto-form__space mb-0">
+            <a (click)="onUpSteps(0)" class="auto-form__close">
+                <img src="assets/images/arrow_back_24px.svg" alt="">
+            </a>
+            <div class="row align-items-center">
+                <div class="col-8">
+                    <h2 style="font-family: 'SuisseIntl', sans-serif; font-weight: 700;">
+                        {{ 'registerUser.almost_there' | translate }}<br>
+                        {{ 'registerUser.check_your_email' | translate }}
+                    </h2>
+                </div>
+                <div class="col-4 text-right">
+                    <img class="logo-img" src="assets/images/sert/logo.svg" width="55" height="55">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-10 text-center offset-1">
+                    <p style="color: #666892; font-family: 'SuisseIntl', sans-serif; line-height: 1;">
+                        {{ 'registerUser.finish_singup' | translate }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row mt-5 mb-3">
+                <div class="col-10 text-center offset-1">
+                    <p style="color: #666892; font-family: 'SuisseIntl', sans-serif; line-height: 1;">
+                        {{ 'registerUser.didnt_get_it' | translate }}
+                        <a href="#" (click)="renviarEmailActivacion()">
+                            {{ 'registerUser.resend_it' | translate }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-terms-conditions></app-terms-conditions>

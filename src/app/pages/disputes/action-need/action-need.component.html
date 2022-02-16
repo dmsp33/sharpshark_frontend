@@ -1,0 +1,55 @@
+<div class="card mb-0 card-offset card-spase">
+    <div class="scroll-content-y scroll-content-y_low ">
+
+        <table id="dinamicData" class="table table-mob-alert" style="min-height: 100%">
+            <thead class="table-head">
+                <tr>
+                    <th class="text-uppercase"> {{'table.your_document_title' | translate }} </th>
+                    <th class="text-uppercase"> {{'table.discovered' | translate }} </th>
+                    <th class="text-uppercase"> {{'table.appeared_on' | translate }} </th>
+                </tr>
+            </thead>
+
+
+            <tbody class="table-body">
+
+                <tr class="table-row table-row_border-none" *ngIf="arrayAlerts.length==0">
+                    <td class="row-item row-over">
+                        <p>
+                            {{'table.this_a_blank_page' | translate }}
+                        </p>
+                    </td>
+                    <td class="row-item"></td>
+                    <td class="row-item dropdown"></td>
+                </tr>
+                
+                <tr class="table-row" *ngFor="let el of arrayAlerts; let i = index">
+                    <td class="row-item row-over">
+                        <p>
+                            <span class="bold">{{el.alerta.title}}</span> {{el.alerta.content.toString().substring(0, 90)}}
+                        </p>
+                    </td>
+                    <td class="row-item">
+                        {{el.alerta.created_at | date:'dd MMM YYYY HH:mm a'}}
+                    </td>
+                    <td class="row-item">
+                        {{el.created_at | date:'dd MMM YYYY HH:mm a'}}
+                    </td>
+                </tr>
+                <!-- muestra las alertas today-->
+                <!-- <tr *ngIf="totalAlertsToday > 0" class="table-row table-gray">
+                    <td class="row-item">
+                    </td>
+
+                    <td class="row-item">
+                    </td>
+
+                    <td class="row-item">
+                        {{'translate.draft.lbl_table_02' | translate}}
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <app-modal-change-status (updateLista)="updateListaAlerts()"></app-modal-change-status> -->

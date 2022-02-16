@@ -1,0 +1,187 @@
+<main class="app-main">
+    <div class="main-wrap">
+        <div class="art toggler">
+            <div class="art__row art__row_mob">
+                <div class="art__left-side">
+                    <a class="draft-list-popover">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path style="fill:#9FA2B4"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z" />
+                        </svg>
+                      <div class="draft-list-content">
+                        <div class="link-masked__content">
+                            <p>Draft’s aren’t published or tracked for copyright violations</p>
+                          </div>
+                      </div>
+                    </a>
+
+                    <h2 class="art__title">
+                        Dispute resolution: Website owner’s level
+                    </h2>
+
+                </div>
+                <div class="art__right-side">
+                    <!-- <a  class="link color_link2 art__resume"
+                        title="Don’t get copyright alerts about this document">
+                        <span>
+                            Save
+                        </span>
+                    </a> -->
+                    <button class="art__close" type="button" data-toggle="tooltip" 
+                        title="Don’t get copyright alerts about this document" 
+                        data-toggle="modal" data-target="#disputeModal">
+                        Save & close
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="art__buttons ">
+                <div class="art__buttons_wrap">
+                    <div class="art__buttons_left">
+                        <a (click)="step = 1" [ngClass]="{ 'badge-primary': step==1, 'badge-dark': step!=1}" class="badge" disabled>
+                            Collecting evidence
+                        </a>
+                        <a (click)="step = 2" [ngClass]="{ 'badge-primary': step==2, 'badge-dark': step!=2}" class="badge" disabled>
+                            Generating claim
+                        </a>
+                        <a (click)="step = 3" [ngClass]="{ 'badge-primary': step==3, 'badge-dark': step!=3}" class="badge" disabled>
+                            Contacts
+                        </a>
+                    </div>
+
+                    <div class="art__buttons_right">
+                        <a class="info-wrap toggler-trigger active" (click)="showInfo = false">
+                            <div class="d-flex align-items-center">
+                                <svg class="icons  icons_open-qest">
+                                    <use xlink:href="assets/images/icons.svg#open-qest"></use>
+                                </svg>
+                                <div class="arrow"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="" [ngClass]="{'toggler__content': !showInfo}">
+                <div class="art__content">
+                    <div class="info info__item info__item_width info__item_blue" *ngIf="step == 1">
+                        <div class="info__left">
+                            <i class="info-circle"></i>
+                            <span>
+                                Let’s collect evidence and get some justice
+                            </span>
+                            <div class="info__descript">
+                                <p>The key to success is solid evidence. Follow our steps to structure your evidence properly</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info info__item info__item_width info__item_blue" *ngIf="step == 2">
+                        <div class="info__left">
+                            <i class="info-circle"></i>
+                            <span>
+                                Let’s create a claim
+                            </span>
+                            <div class="info__descript">
+                                <p>Based on your evidence, this is the claim. Please check and correct it, if needed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info info__item info__item_width info__item_blue" *ngIf="step == 3">
+                        <div class="info__left">
+                            <i class="info-circle"></i>
+                            <span>
+                                Final step — finding the contacts
+                            </span>
+                            <div class="info__descript">
+                                <p>This is the hardest part but we will guide you. Find out how to reach the violator and contact them. In 24 hours we will suggest to move to the next stage or close the case, if resolved. What are the stages? </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <app-dispute-form-evidence *ngIf="step==1" (disputeData)="addEvidenceData($event)" (changeStep)="step=$event"></app-dispute-form-evidence>
+        <app-dispute-form-claim *ngIf="step==2" (changeStep)="step=$event"></app-dispute-form-claim>
+        <app-dispute-form-contacts *ngIf="step==3" [(disputeData)]="dispute" (ChangeContactType)="changeContactType($event)"></app-dispute-form-contacts>
+    </div>
+</main>
+
+
+<div class="modal fade " id="disputeModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div style="padding: 32px;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                
+                <div *ngIf="!dispute || dispute?.contact_type=='email'">
+
+                    <h1 class="font-weight-bold">
+                        Shall we send the claim?
+                    </h1>
+                    <p class="text-muted">
+                        We will send the claim (check the full text here) from your email to the website owner’s email you provided with SharpShark cc’ed. After one business day, we suggest to either resolve the case or proceed to the next level if they don’t respond.
+                    </p>
+                    <div class="form-check mb-16">
+                        <input class="form-check-input" type="checkbox" value="" id="agreeWithProcess">
+                        <label class="form-check-label" for="agreeWithProcess">
+                            I fully agree with the process
+                        </label>
+                    </div>
+                </div>
+
+                <div *ngIf="dispute && dispute?.contact_type=='form'">
+                    <h1 class="font-weight-bold">
+                        Have you sent the claim?
+                    </h1>
+                    <p class="text-muted">
+                        You told us that you have sent the claim via form, have you? Then, after one business day, we suggest to end the case or proceed to the next level if they don’t respond
+                    </p>
+                    <div class="form-check mb-16">
+                        <input class="form-check-input" type="checkbox" value="" id="agreeWithProcess">
+                        <label class="form-check-label" for="agreeWithProcess">
+                            I have sent the claim and I fully agree with the process
+                        </label>
+                    </div>
+                </div>
+
+                <div *ngIf="dispute && dispute.contact_type=='nothing'">
+                    <h1 class="font-weight-bold">
+                        No trace of contacts, right?
+                    </h1>
+                    <p class="text-muted">
+                        It’s impossible to find their contacts anywhere, right? If so, we will now prepare a claim for the provider so you can send it immediately
+                    </p>
+                    <div class="form-check mb-16">
+                        <input class="form-check-input" type="checkbox" value="" id="agreeWithProcess">
+                        <label class="form-check-label" for="agreeWithProcess">
+                            I can’t find any contacts and want to notify their provider
+                        </label>
+                    </div>
+                    <div class="form-check mb-16">
+                        <input class="form-check-input" type="checkbox" value="" id="privacyPolice">
+                        <label class="form-check-label" for="privacyPolice">
+                            I checked their privacy policy and cookies agreement:there are no contacts mentioned there
+                        </label>
+                    </div>
+                </div>
+
+                <div style="height: 40px;"></div>
+                <div class="row justify-content-end mt-2 py-2" style="width: 100%; display: flex;">
+                    <button class="art__close" type="button" data-toggle="tooltip">
+                        Cancel
+                    </button>
+                    <button class="btn btn_blue" type="button" data-toggle="tooltip"
+                        [routerLink]="'/alerts'" data-dismiss="modal" aria-label="Close">
+                        <span *ngIf="!dispute || dispute?.contact_type=='email'">Let’s send it!</span>
+                        <span *ngIf="dispute && dispute?.contact_type=='form'">Claim was sent</span>
+                        <span *ngIf="dispute && dispute?.contact_type=='nothing'">Let’s take it to the next level!</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

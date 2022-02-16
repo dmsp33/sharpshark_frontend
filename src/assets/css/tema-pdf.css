@@ -1,0 +1,81 @@
+  .certificado h1 {
+      font-size: 24px !important;
+      letter-spacing: .2px;
+      margin-bottom: 12px !important;
+  }
+  
+  .certificado blockquote:before {
+      position: absolute !important;
+      color: #979CBC !important;
+      font-size: 3rem !important;
+      width: 4rem !important;
+      height: 4rem !important;
+      content: '”' !important;
+      left: 0 !important;
+      top: -1rem !important;
+  }
+  
+  .certificado blockquote {
+      position: relative;
+      overflow: visible !important;
+      padding-right: 1.5rem !important;
+      padding-left: 2rem !important;
+      margin-left: 2.5rem !important;
+      margin-right: 0 !important;
+      margin-bottom: 0.5 !important;
+      font-style: normal !important;
+      border-left: none !important;
+  }
+  
+  .certificado blockquote p a {
+      display: block;
+      text-decoration: none;
+  }
+  
+  .certificado blockquote p a::before {
+      font-family: 'Material Icons';
+      content: "copyright link";
+      font-weight: normal;
+      font-style: normal;
+      font-size: 1.2em;
+      display: inline-block;
+      vertical-align: middle;
+      width: 2.1em;
+      height: 1em;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: 'liga';
+      color: #979CBC;
+      margin-right: 10px;
+  }
+  
+  .certificado p a::before {
+      font-family: 'Material Icons';
+      content: "link";
+      font-weight: normal;
+      font-style: normal;
+      font-size: 1.2em;
+      display: inline-block;
+      vertical-align: middle;
+      width: 1em;
+      height: 1em;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: 'liga';
+      color: #979CBC;
+      margin-right: 10px;
+  }

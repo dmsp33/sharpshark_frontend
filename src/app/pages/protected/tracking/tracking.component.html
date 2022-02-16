@@ -1,0 +1,46 @@
+<div class="card mb-0 card-offset card-scroll card-spase">
+    <div *ngIf="blockUiColor == 'morado'" class="card mb-0 card-offset card-spase card-reload" style="height: 80vh" >
+      <div class="card-mask">
+        <img src="assets/images/check-b.svg" alt="">
+        <div class="card-mask__desc">
+                <span></span>
+        </div>
+      </div>
+    </div>
+
+    <table *ngIf="blockUiColor != 'morado'" class="table table-mob-alert overflow-auto">
+      <thead class="table-head">
+        <tr>
+          <th>TITLE </th>
+          <th>PROTECTED</th>
+          <th>UPDATED</th>
+        </tr>
+      </thead>
+
+      <tbody class="table-body" class="overflow-auto">
+          <tr *ngIf="documentsToday.length == 0 && documentsWeek.length == 0 && documentsMonth.length == 0 
+          && documentsEvenEarlier.length  == 0" class="table-row table-row_border-none">
+            <td class="row-item row-over">
+              <p>
+                  This is a blank page... Cases will appear here 
+              </p>
+            </td>
+            <td class="row-item"></td>
+            <td class="row-item dropdown"></td>
+          </tr>
+
+          <!-- Today  -->
+          <protected-tracking-group-by-date [data]="documentsToday" [group]="'today'" (changeStatus)="changeStatusMonitoring($event)"></protected-tracking-group-by-date>
+          
+          
+          <!-- Earlier this week  -->
+          <protected-tracking-group-by-date [data]="documentsWeek" [group]="'week'" (changeStatus)="changeStatusMonitoring($event)"></protected-tracking-group-by-date>
+
+          <!-- Earlier this month  -->
+          <protected-tracking-group-by-date [data]="documentsMonth" [group]="'month'" (changeStatus)="changeStatusMonitoring($event)"></protected-tracking-group-by-date>
+
+          <!-- Even Earlier  -->
+          <protected-tracking-group-by-date [data]="documentsEvenEarlier" [group]="'even_earlier'" (changeStatus)="changeStatusMonitoring($event)"></protected-tracking-group-by-date>
+      </tbody>
+  </table>
+</div>

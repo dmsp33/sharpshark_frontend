@@ -1,0 +1,133 @@
+
+<div class="card mb-0 card-offset card-scroll card-spase px-5 py-4">
+
+    <div class="row">
+        <div class="col-6">
+            <h2 style="font-weight: bold; font-size: 30px">Next billing date: 05 Apr 2021</h2>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12">
+            <span style="font-size: 18px" class="text-muted">Monotonectally develop visionary benefits vis-a-vis granular data. 
+                <u style="cursor: pointer;" class="text-primary"> Completely transform bleeding-edge </u>
+            </span>
+        </div>
+    </div>
+
+          <div class="row">
+            <div class="col-8">
+              <span class="w-100" style="font-size: 40px; font-weight: bold">${{ cost }}/mos</span>
+            </div>
+            <div class="col-4">
+              <button (click)="registerPay()" style="height: 48px;" class="btn btn-sh-primary">Update and pay the difference</button>
+            </div>
+          </div>
+
+          <div class="row" style="margin-bottom: 40px">
+            <div class="col-12">
+              <span style="font-size: 14px; font-weight: bold">We will charge you additional $195 for this month and update your plan by default</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <span style="font-size: 16px; font-weight: bold">Included by default</span>
+              <div class="row align-items-center mb-3 mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span style="font-size: 15px" class="ml-2">A point of some unordered list </span>
+              </div>
+              <div class="row align-items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span style="font-size: 15px" class="ml-2">A point of some unordered list with text </span>
+              </div>
+              <div class="row align-items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span style="font-size: 15px" class="ml-2">A point of some unordered list with text </span>
+              </div>
+              <div class="row align-items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span style="font-size: 15px" class="ml-2">A point of some </span>
+              </div>
+              <div class="row align-items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span style="font-size: 15px" class="ml-2">A point of some unordered list </span>
+              </div>
+            </div>
+            <div class="col">
+              <span style="font-size: 16px; font-weight: bold">Customizeable </span>
+              <div class="row align-items-center mb-3 mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span style="font-size: 15px" class="ml-2">1h after the publication</span>
+              </div>
+              <div class="row align-items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span style="font-size: 15px" class="ml-2">Every 24 h during </span>
+              </div>
+
+            
+              <div class="form-group">
+                <label style="font-weight: bold; font-size: 20px;margin-bottom: 10px;" for="formControlRange">
+                  {{ days }} days
+                </label>
+                <input [(ngModel)]="days" style="height: 2px; background: #4700E5;" type="range" min="1" 
+                  max="60"  class="form-control-range" name="art" id="formControlRange" >
+
+                <span *ngIf="err" class="text-danger text-sm">You must select an amount</span>
+             </div>
+              <div class="row mb-3">
+                  <div class="col">
+                    
+                    
+                    <span>Rarely </span>
+                  </div>
+                  <div class="col text-center">
+                    <span>Currently 30 days</span>
+                  </div>
+                  <div class="col text-right">
+                    <span>Frequently </span>
+                  </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="gray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span style="font-size: 15px" class="ml-2">Number of publications (protected documents)</span>
+              </div>
+
+              <div class="form-group">
+                 <label style="font-weight: bold; font-size: 20px;margin-bottom: 10px;" for="formControlRange">{{ articles }} docs</label>
+                 <input (change)="calculate()" [(ngModel)]="value" style="height: 2px; background: #4700E5;" type="range" min="1" max="3"  step="1"  class="form-control-range" name="art" id="formControlRange" >
+
+                 <span *ngIf="err" class="text-danger text-sm">You must select an amount</span>
+              </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <span>Small</span>
+                  </div>
+                  <div class="col text-center">
+                    <span>Currently 10 docs (3 docs left)</span>
+                  </div>
+                  <div class="col text-right">
+                    <span>Large</span>
+                  </div>
+                </div>
+
+            </div>
+    </div>
+
+</div>
+
+
+      
+
+
+
+
+
+          
+
+
+
+
+
+                
+            

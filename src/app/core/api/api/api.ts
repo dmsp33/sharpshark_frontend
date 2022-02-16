@@ -1,0 +1,11 @@
+export * from './alerta.service';
+import { AlertaService } from './alerta.service';
+export * from './certificado.service';
+import { CertificadoService } from './certificado.service';
+export * from './disputa.service';
+import { DisputaService } from './disputa.service';
+export * from './documento.service';
+import { DocumentoService } from './documento.service';
+export * from './documentosEliminados.service';
+import { DocumentosEliminadosService } from './documentosEliminados.service';
+export const APIS = [AlertaService, CertificadoService, DisputaService, DocumentoService, DocumentosEliminadosService];

@@ -1,0 +1,102 @@
+.evidence-content {
+    padding-top: 16px;
+    padding-left: 16px;
+    font-family: "SuisseIntl";
+    overflow-x: hidden;
+
+    a {
+        cursor: pointer;
+        color: #666892;
+    }
+    .mb-21 {
+        margin-bottom: 21px;
+    }
+    .mb-27 {
+        margin-bottom: 27px;
+    }
+    .mb-16 {
+        margin-bottom: 16px;
+    }
+    .mb-8 {
+        margin-bottom: 8px;
+    }
+    .btn-evidence, input.h, select {
+        height: 42px !important;
+        min-height: 42px;
+        max-height: 42px !important;
+    }
+    .btn-evidence {
+        i{
+            margin-right: 9.33px;
+        }
+    }
+
+    .title {
+        font-size: 20px; 
+        font-style: normal; 
+        font-weight: 700; 
+        line-height: 24px; 
+        letter-spacing: 0px; 
+        text-align: left;
+
+        margin-bottom: 16px;
+    }
+    .title2 {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        text-align: left;
+        margin-bottom: 8px;
+    }
+    .info {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0px;
+        text-align: left;
+        color: #666892;
+
+        &.link {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: 0px;
+            text-align: left;
+        }
+    }
+
+    .btn-delete {
+        color: #e50c54;
+        width: 20px;
+        height: 20px;
+    }
+    .form-check-label {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: 0px;
+        text-align: left;
+    }
+    .input-group.amount {
+        width: 256px;
+        input {
+            border: none;
+        }
+        .btn-amount {
+            min-height: 42px !important;
+            max-height: 42px !important;
+            height: 42px !important;
+            box-shadow: none;
+            color: #666892;
+        }
+    }
+
+    .disable{
+        pointer-events: none;
+    }
+}

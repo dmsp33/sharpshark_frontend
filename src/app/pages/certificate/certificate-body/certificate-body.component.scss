@@ -1,0 +1,73 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '@imports/variables';
+@import '../certificate.component.mixins';
+
+$line-thickness: 2px;
+$padding-body-item: 25px;
+
+.certificate-body {
+  &__item {
+    padding-top: $padding-body-item;
+    padding-bottom: $padding-body-item;
+
+    &--underlined {
+      position: relative;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: $line-thickness;
+        background: $base-font-color;
+        @include media-breakpoint-down(sm) {
+          width: 99999999px;
+        }
+      }
+    }
+  }
+
+  .certificate-title {
+    &--locked {
+      padding: 4px;
+      color: $light-blue-color;
+      background: $base-font-color;
+      text-transform: uppercase;
+    }
+  }
+
+  &__copyright,
+  &__quote-authors,
+  &__history {
+    padding-bottom: $padding-body-item - 15px;
+  }
+
+  &__key,
+  &__value {
+    @include font-desktop();
+    @include font-mobile();
+    margin-bottom: 15px;
+  }
+
+  .certificate-body-history {
+    @include font-desktop();
+    @include font-mobile();
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: space-between;
+    margin-left: 25px;
+
+    &__top {
+      margin-top: -2px;
+    }
+
+    &__bottom {
+      margin-bottom: -2px;
+    }
+  }
+}

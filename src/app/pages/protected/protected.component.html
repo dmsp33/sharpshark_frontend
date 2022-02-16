@@ -1,0 +1,106 @@
+<main class="app-main">
+    <div class="main-wrap">
+        <div class="art toggler">
+            <div class="art__row">
+                <div class="art__left-side">
+                    <a class="protec-popover">
+                        <svg class="icons icons_offset-left icons_color icon_green icons_armom">
+                            <use xlink:href="assets/images/icons.svg#armom">
+                            </use>
+                        </svg>
+                        <div class="prueba-popover">
+                            <div class="link-masked__content">
+                                <p>{{ 'protected.protected_works_are_published_in_ipfs' | translate }} <a
+                                        class="text-white"
+                                        href="https://sharpshark.io/#faq">{{ 'protected.learn_more' | translate }}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <h2 class="art__title">
+                        {{ 'protected.protected_documents' | translate }}
+                    </h2>
+
+                </div>
+            </div>
+            <div class="art__buttons ">
+
+                <div class="art__select">
+                    <div class="dropdown-group dropdown-group-blue dropdown-group-middle w-100" role="group">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"><span>translate.protected.btn_menu011</span>
+                        </button>
+                        <ul class="dropdown dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                            <li class="menu-item">
+                                <a class="item-link">translate.protected.btn_menu011</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="item-link">translate.protected.btn_menu03</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="art__buttons_wrap">
+                    <div class="art__buttons_left">
+                        <sh-filter-tab
+                                [value]="ProtectedType.Tracking"
+                                [active]="selectedType === ProtectedType.Tracking"
+                                (selected)="selectType($event)"
+                        >
+                            {{ 'protected.tracking' | translate }} ({{totalRegistrosMonitored}})
+                        </sh-filter-tab>
+                        <sh-filter-tab
+                                [value]="ProtectedType.NotTracking"
+                                [active]="selectedType === ProtectedType.NotTracking"
+                                (selected)="selectType($event)"
+                        >
+                            {{ 'protected.not_tracking' | translate }} ({{totalRegistrosNotMonitored}})
+                        </sh-filter-tab>
+                    </div>
+                    <div class="art__buttons_right">
+                        <a (click)="activeInfo()" class="info-wrap toggler-trigger">
+                            <svg class="icons  icons_open-qest">
+                                <use xlink:href="assets/images/icons.svg#open-qest">
+                                </use>
+                            </svg>
+                            <div class="arrow"></div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="toggler__content">
+                <div class="art__content">
+                    <div class="info info__item info__item_width info__item_blue">
+                        <div class="info__left">
+                            <i class="info-circle"></i>
+
+                            <span *ngIf="selectedType === ProtectedType.Tracking">We’re keeping an eye on these documents</span>
+                            <span *ngIf="selectedType === ProtectedType.NotTracking"> We don’t track violations here </span>
+
+                            <div class="info__descript">
+                                <p *ngIf="selectedType === ProtectedType.Tracking">These are your protected documents,
+                                    saved in an immutable form. We
+                                    monitor the internet every 7 days for possible misuse of your content and let you
+                                    know about any red flags </p>
+                                <p *ngIf="selectedType === ProtectedType.NotTracking">Your once protected, but no longer
+                                    tracked works. This means that we
+                                    don’t monitor the misuse of your copyright (but it is still yours). However, you can
+                                    resume monitoring anytime and we’ll fetch all the violations </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <alert></alert> -->
+        <ng-container [ngSwitch]="selectedType">
+            <app-protected-tracking *ngSwitchCase="ProtectedType.Tracking"></app-protected-tracking>
+            <app-protected-notracking *ngSwitchCase="ProtectedType.NotTracking"></app-protected-notracking>
+        </ng-container>
+    </div>
+</main>

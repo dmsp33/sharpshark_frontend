@@ -1,0 +1,21 @@
+<section class="certificate-questions">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <h4 class="certificate-questions__title">
+                {{ 'certificate.faq.title' | translate }}
+            </h4>
+        </div>
+        <div class="col-12 col-sm-12 col-md-9 col-lg-9">
+            <dl class="certificate-questions-block">
+                <ng-container *ngFor="let questionsItem of questions">
+                    <dt class="certificate-questions-block__question">
+                        {{ questionsItem.question }}
+                    </dt>
+                    <dd class="certificate-questions-block__answer">
+                        {{ questionsItem.answer }}
+                    </dd>
+                </ng-container>
+            </dl>
+        </div>
+    </div>
+</section>

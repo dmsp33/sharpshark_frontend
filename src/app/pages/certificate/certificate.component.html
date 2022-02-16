@@ -1,0 +1,22 @@
+<div *ngIf="certificateCurrentVersion" class="certificate">
+    <sh-certificate-header [certificate]="certificateCurrentVersion"></sh-certificate-header>
+    <sh-certificate-body
+            [certificate]="certificateCurrentVersion"
+            [certificateOtherVersions]="certificateOtherVersions"
+    ></sh-certificate-body>
+    <div class="certificate__content">
+        <sh-certificate-content
+                *ngIf="!certificateCurrentVersion.bloqueado; else lockedContentTemplate"
+                [certificate]="certificateCurrentVersion"
+        ></sh-certificate-content>
+        <ng-template #lockedContentTemplate>
+            <sh-certificate-content-locked></sh-certificate-content-locked>
+        </ng-template>
+    </div>
+    <div *ngIf="questions$ | async as questions" class="certificate__questions">
+        <sh-certificate-questions [questions]="questions"></sh-certificate-questions>
+    </div>
+    <div class="certificate__footer">
+        <sh-certificate-footer></sh-certificate-footer>
+    </div>
+</div>

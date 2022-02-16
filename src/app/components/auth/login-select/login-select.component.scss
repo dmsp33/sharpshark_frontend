@@ -1,0 +1,27 @@
+.modal-content .close {
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+    background: none;
+    font-size: 1rem;
+    z-index: 1;
+    font-weight: normal !important;
+  }
+  
+  .modal-content {
+    background: rgba(0, 0, 0, 0);
+  }
+  
+  .modal-content .close {
+    right: 100px !important;
+    top: 14px;
+  }
+
+.mouse-hover, a {
+  cursor: pointer;
+}
+.join-list__back_offset {
+  margin-bottom: 12px;
+}
+.join-list__wrap {
+  margin-top: 0px;
+}

@@ -1,0 +1,35 @@
+.dropdown.bootstrap-select .btn {
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+  
+  .buscador {
+    max-width: 20rem !important;
+    margin-right: 0.8rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+  }
+  
+  .mostrar-buscador {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.dropdown-menu.lang {
+  width: 55px !important;
+  min-width: 55px !important;
+  transform: none !important;
+
+  &:hover {
+    border-radius: .25rem !important;
+  }
+  .dropdown-item {
+    padding: 5px 10px;
+    cursor: pointer;
+
+    &:hover {
+      border-radius: .25rem !important;
+    }
+  }
+}

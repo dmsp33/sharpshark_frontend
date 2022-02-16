@@ -1,0 +1,9 @@
+@import 'common-settings';
+
+$btn-font-family: $font-family-base;
+$btn-font-weight: 500;
+$btn-padding-y: 12px;
+$btn-padding-x: 16px;
+$btn-font-size: '14px'; // if set not a string it will be 0.875rem. WHY???
+$btn-line-height: 20px;
+$btn-border-radius: 8px;

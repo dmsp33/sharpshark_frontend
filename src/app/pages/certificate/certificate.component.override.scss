@@ -1,0 +1,7 @@
+@import 'certificate-history-modal/certificate-history-modal.component.override';
+
+body {
+  &.body--certificate {
+    background: linear-gradient(92.08deg, $light-blue-color 1.32%, $base-font-color-invert 97.84%);
+  }
+}

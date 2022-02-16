@@ -1,0 +1,8 @@
+{
+    "/api": {
+        "target": "http://backend.sharpshark.io",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

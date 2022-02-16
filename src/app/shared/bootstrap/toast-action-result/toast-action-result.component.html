@@ -1,0 +1,12 @@
+<div
+        [class.toast-action-result--visible]="show$ | async"
+        class="toast toast-action-result"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+>
+    <div class="toast-body toast-action-result__body">
+        {{ message$ | async }}
+    </div>
+</div>
+

@@ -1,0 +1,222 @@
+<div class="card mb-0 card-offset card-spase">
+    <div class="scroll-content-y scroll-content-y_low ">
+
+        <table id="dinamicData" class="table table-mob-alert" style="min-height: 100%">
+            <thead class="table-head">
+                <tr>
+                    <th class="text-uppercase"> {{'table.your_document_title' | translate }} </th>
+                    <th class="text-uppercase"> {{'table.appeared_on' | translate }} </th>
+                    <th class="text-uppercase"> {{'table.discovered' | translate }} </th>
+                    <th class="text-uppercase"> {{'table.ended' | translate }} </th>
+                </tr>
+            </thead>
+
+
+
+            <tbody class="table-body">
+                <tr class="table-row table-row_border-none" *ngIf="totalAlerts==0">
+                    <td class="row-item row-over">
+                        <p>
+                            {{'table.this_a_blank_page' | translate }}
+                        </p>
+                    </td>
+                    <td class="row-item"></td>
+                    <td class="row-item"></td>
+                    <td class="row-item dropdown"></td>
+                </tr>
+
+                <!-- muestra las alertas today-->
+                <!-- <tr *ngIf="totalAlertsToday > 0" class="table-row table-gray">
+                    <td class="row-item">
+                    </td>
+
+                    <td class="row-item">
+                    </td>
+
+
+                    <td class="row-item">
+                        {{'translate.draft.lbl_table_02' | translate}}
+                    </td>
+                    <td class="row-item"></td>
+                </tr> -->
+
+                <!--  muestra las alertas today, con 1 pagina de plagio  -->
+                <!-- <tr class="table-row" *ngFor="let el of arrayAlerts; let i = index">
+                    <td *ngIf="el.Pages &&  el.Pages.length == 1 && el.select_view_pages==1" class="row-item row-over">
+                        <span class="badge badge-offset rounded badge-success">R</span>
+                        <p>
+                            <span class="bold">{{el.protected.title}}</span> {{el.protected.description.toString().substring(0, 90)}}
+                        </p>
+                    </td>
+                    <td *ngIf="el.Pages && el.Pages.length == 1 && el.select_view_pages==1 " class="row-item">
+                        <a href="{{el.Pages[0].link_pages}}" class="row-item__link" target='_blank'>
+                            <span>
+                {{el.Pages[0].displaylink_pages }}
+              </span>
+                            <span class="row-item__link-copy">
+                <svg class="icons  icons_open-left">
+                  <use xlink:href="assets/images/icons.svg#open-left">
+                  </use>
+                </svg>
+              </span>
+                            <span class="links-masked">
+                <span class="link-masked__content">
+                  <p>
+                    {{el.Pages[0].link_pages}}
+                  </p>
+                </span>
+                            </span>
+                        </a>
+                    </td>
+                    <td class="row-item" *ngIf="el.Pages &&  el.Pages.length == 1 && el.select_view_pages==1 ">
+                        <span> {{el.discovered_date_f}}</span> {{el.discovered_hour_f}}
+                    </td>
+                    <td *ngIf="el.Pages && el.Pages.length == 1 && el.select_view_pages==1" class="row-item dropdown">
+                        <div class="row-item__spase">
+                            <span> {{el.Pages[0].finalize_date_f}}</span> {{el.Pages[0].finalize_hour_f}}
+                            <div class="dropdown-group dropdown-group-dark">
+                                <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="icon fas fa-ellipsis-v"></i>
+                </button>
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                                    <a [routerLink]="['/viewDoc', el.protected.id_protected]" class="item-link button menu-item">
+                                        <li class="menu-item">
+                                            View my document
+                                        </li>
+                                    </a>
+                                    <a (click)="downloadReport(el.protected.id_protected)" class="item-link button menu-item">
+                                        <li class="menu-item">
+
+                                            View certificate
+
+                                        </li>
+                                    </a>
+                                    <a href="{{el.Pages[0].link_pages}}" class="item-link button menu-item" target="_blank">
+                                        <li class="menu-item">
+                                            Go to page
+                                        </li>
+                                    </a>
+                                    <a *ngIf="adminMaster" (click)="showModalStatus(el.id, el.Pages[0].link_pages)" class="item-link button menu-item">
+                                        <li class="menu-item">
+                                            Change status
+                                        </li>
+                                    </a>
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr> -->
+
+                <!--  muestra las alertas today, con varias paginas de plagio  -->
+                <!-- <ng-container id="container" *ngFor="let el of arrayAlerts;let j = index">
+                    <tr class="table-row table-parent">
+                        <td *ngIf="el.Pages && el.Pages.length > 1  && el.select_view_pages==1 " class="row-item row-over row-trigger" colspan="3">
+                            <div class="row-item__wrapper text-align-wrapper">
+                                <a href="#" class="table-arrow">
+                                    <span></span>
+                                </a>
+                                <span class="badge badge-offset rounded badge-success">R</span>
+                                <p>
+                                    <span class="bold">{{el.protected.title}} </span> {{el.protected.description.toString().substring(0, 90)}}...
+                                </p>
+                            </div>
+                        </td>
+                        <td *ngIf="el.Pages && el.Pages.length  > 1 && el.select_view_pages==1">
+                            <div class="vertical-m vertical-m__rightsite">
+                                <div class="dropdown-group dropdown-group-dark">
+                                    <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon fas fa-ellipsis-v"></i>
+                  </button>
+                                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                                        <a [routerLink]="['/viewDoc', el.protected.id_protected]" class="item-link button menu-item">
+                                            <li class="menu-item">
+                                                View my document
+                                            </li>
+                                        </a>
+                                        <a (click)="downloadReport(el.protected.id_protected)" class="item-link button menu-item">
+                                            <li class="menu-item">
+
+                                                View certificate
+
+                                            </li>
+                                        </a>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </td>
+
+                    </tr>
+
+                    <tr *ngFor="let pages of el.Pages;" class="table-row table-row__widget">
+                        <td class="row-item row-over" colspan="2">
+                            <div class="row-item__wrapper text-align-wrapper">
+                                <p>
+                                    <a>{{pages.link_pages}}</a>
+                                </p>
+                            </div>
+                        </td>
+                        <td class="row-item row-over">
+                            <span> {{el.discovered_date_f}}</span> {{el.discovered_hour_f}}
+                        </td>
+                        <td class="row-item dropdown">
+                            <div class="vertical-m">
+                                <div class="vertical-m__left">
+                                    <span> {{pages.finalize_date_f}}</span> {{pages.finalize_hour_f}}
+                                </div>
+
+                                <div class="vertical-m__right">
+
+                                </div>
+
+                                <div class="dropdown-group dropdown-group-dark">
+                                    <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon fas fa-ellipsis-v"></i>
+                  </button>
+                                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                                        <a [routerLink]="['/viewDoc', el.protected.id_protected]" class="item-link button menu-item">
+                                            <li class="menu-item">
+                                                View my document
+                                            </li>
+                                        </a>
+                                        <a href="{{pages.link_pages}}" class="item-link button menu-item" target="_blank">
+                                            <li class="menu-item">
+                                                Go to page
+                                            </li>
+                                        </a>
+                                        <a (click)="downloadReport(el.protected.id_protected)" class="item-link button menu-item">
+                                            <li class="menu-item">
+
+                                                View certificate
+
+
+                                            </li>
+                                        </a>
+                                        <a *ngIf="adminMaster" (click)="showModalStatus(el.id, pages.link_pages)" class="item-link button menu-item">
+                                            <li class="menu-item">
+                                                Change status
+                                            </li>
+                                        </a>
+
+
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                        </td>
+                    </tr>
+
+                </ng-container> -->
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <app-modal-change-status (updateLista)="updateListaAlerts()"></app-modal-change-status> -->

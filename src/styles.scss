@@ -1,0 +1,170 @@
+@import 'src/app/styles/index';
+
+@font-face {
+    font-family: 'SuisseIntl';
+    src: url('./assets/fonts/SuisseIntl-Regular-WebS.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SuisseIntl';
+    src: url('./assets/fonts/SuisseIntl-Medium-WebM.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SuisseInt';
+    src: url('./assets/fonts/SuisseIntl-Bold-WebM.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+.horizontal-nav{
+    margin: 0;
+}
+
+.toast-success{opacity:1.0!important;background-color:#35af8d}
+.toast-error{opacity:1.0!important;background-color:#e42c2c}
+.toast-warning{opacity:1.0!important}
+
+.icon_white{
+    color: white;
+}
+
+.container {
+  max-width: 720px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.quote {
+    color: #8cc540;
+    font-style: italic;
+}
+
+.redText {
+    color: Red;
+    font-size: 12px;
+    font-family: Arial;
+}
+
+h1.titleText {
+    color: #000000;
+    text-align: left;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+.but-gradient{
+    margin-top:5px;
+    margin-left:5px;
+
+    background: #9FA2B4;
+    border-radius: 100px;
+    padding: 5px 12px;
+    font-weight: bold;
+    font-size: 11px;
+    align-items: center;
+    text-align: center;
+}
+
+a.badge-dark:focus, a.badge-dark:hover {
+    color: #fff;
+    background-color: #253dd9;
+    border-color: #253dd9;
+    cursor: pointer;
+  }
+
+  a.badge-primary:focus, a.badge-primary:hover {
+    color: #fff;
+    background-color: #253dd9;
+    border-color: #253dd9;
+    cursor: pointer;
+  }
+
+  .text-align-wrapper{
+    justify-content:left;
+}
+
+.center-text{
+    text-align: center;
+}
+
+a.button {
+    color:#78799e;
+
+
+}
+a.button:hover{
+    color: white;
+    cursor: pointer;
+}
+
+a.link-parrafo {
+    color:#78799e;
+
+
+}
+
+
+
+.page {
+    overflow-x: hidden;
+
+    .app-container {
+        width: calc(100% - 290px);
+        margin-left: auto;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        @media (max-width: 1030px) {
+            display: none;
+        }
+    }
+
+    main {
+        background-color: #f7f8fc;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: block;
+
+        .main-wrap {
+            background-color: #f7f8fc;
+            display: flex;
+            flex-flow: column;
+            height: calc(100vh - 85px);
+            padding: 1.71429rem 2.14286rem 2.14286rem;
+        }
+
+        &.app-main {
+            padding-bottom: 50px;
+        }
+    }
+}
+
+button {
+    border-radius: 4px !important;
+}
+
+.dropdown-menu .menu-item {
+    transition: none !important;
+}
+
+
+alert-group-by-date,
+alert-notactual-group-by-date,
+protected-tracking-group-by-date,
+protected-not-tracking-group-by-date {
+    display: contents !important;
+}
+a.table-arrow {
+    margin-right: 10px;
+}
+table .vertical-m.btns {
+    justify-content: inherit;
+}

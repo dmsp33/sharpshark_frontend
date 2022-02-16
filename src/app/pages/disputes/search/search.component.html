@@ -1,0 +1,31 @@
+<div class="card mb-0 card-offset card-spase">
+    <div class="scroll-content-y scroll-content-y_low ">
+
+        <table id="dinamicData" class="table table-mob-alert" style="min-height: 100%">
+            <thead class="table-head">
+                <tr>
+                    <th class="text-uppercase"> {{'table.your_document_title' | translate }}</th>
+                    <th class="text-uppercase"> {{'table.appeared_on' | translate }}</th>
+                    <th class="text-uppercase"> {{'table.discovered' | translate }}</th>
+                    <th class="text-uppercase"> {{'table.claim_sent' | translate }}</th>
+                </tr>
+            </thead>
+
+
+
+            <tbody class="table-body">
+                <tr class="table-row table-row_border-none" *ngIf="totalAlerts==0">
+                    <td class="row-item row-over">
+                        <p>
+                            {{'table.this_a_blank_page' | translate }}
+                        </p>
+                    </td>
+                    <td class="row-item"></td>
+                    <td class="row-item"></td>
+                    <td class="row-item dropdown"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <app-modal-change-status (updateLista)="updateListaAlerts()"></app-modal-change-status> -->

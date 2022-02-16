@@ -1,0 +1,109 @@
+<div class="card mb-0 card-offset card-scroll card-spase">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-uppercase" scope="col">Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let name of names">
+            <th [ngClass] = "{ 'input-stick': name.show == false  }" scope="row">{{ name.name }}</th>
+            <td class="text-right">
+                <button class="btn btn_default" *ngIf="name.default else makeDefault">Default</button>
+                <ng-template #makeDefault>
+                    <button class="btn btn-sh-primary btn_make_default">Make Default</button>
+                </ng-template>
+                <span *ngIf="name.show == true" style="color: #4700E5" class="mr-4">Edit</span>
+                <span *ngIf="name.show == true; else Reverse" (click)="name.show = false" style="cursor: pointer" class="text-danger mr-4">Delete</span>
+
+
+                <div class="dropdown-group  dropdown-group-dark">
+
+                    <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <i class="icon fas fa-ellipsis-v"></i> -->
+                        <svg *ngIf="name.show == true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666892" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                        <a  class="item-link button menu-item" data-toggle="modal" data-target="#ChangeName">
+                            <li class="menu-item">
+                                Change name
+                            </li>
+                        </a>
+                        <a  class="item-link button menu-item " data-toggle="modal" data-target="#AddName">
+                            <li class="menu-item">
+                                Add name
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+
+                <ng-template #Reverse name="name">
+                            
+                    <img (click)="name.show = true" src="assets/images/undo_24px.svg" alt="">
+                    <span>Undo deleting</span>
+                
+                </ng-template>
+            </td>
+        </tr>
+        
+        </tbody>
+   </table>
+</div>
+
+
+<div class="modal fade " id="ChangeName" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div style="padding: 32px;">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+                <h1 style="font-weight: bold; font-size: 30px; line-height: 30px;" 
+                    class="font-weight-bold">Change name </h1>
+                <p style="font-size: 12px; line-height: 16px; color: #0A001E; font-weight: bold;" class=" text-uppercase mt-4">Name or pen name</p>
+
+                <p class="text-muted">  We sent you a code via email. <br>Didn’t get? We can resend it in 59 sec</p>
+
+                <div class="form-group">
+                
+                <input class="form-control" type="text" placeholder="code">
+                </div>
+
+
+                <button class="btn btn-sh-primary btn-block mt-4" data-dismiss="modal">Change name</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="AddName" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div style="padding: 32px;">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+                <h1 style="font-weight: bold; font-size: 30px; line-height: 30px;" 
+                    class="font-weight-bold">Add name </h1>
+                <p style="font-size: 12px; line-height: 16px; color: #0A001E; font-weight: bold;" class=" text-uppercase mt-4">Name or pen name</p>
+
+                <p class="text-muted">  We sent you a code via email. <br>Didn’t get? We can resend it in 59 sec</p>
+
+                <div class="form-group">
+                
+                <input class="form-control" type="text" placeholder="code">
+                </div>
+
+
+                <button class="btn btn-sh-primary btn-block mt-4" data-dismiss="modal">Add name</button>
+            </div>
+        </div>
+    </div>
+</div>

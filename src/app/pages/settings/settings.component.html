@@ -1,0 +1,106 @@
+<main class="app-main">
+    <div class="main-wrap">
+        <div class="art toggler">
+
+            <div class="art__row">
+                <div class="art__left-side">
+
+                    <a class="draft-list-popover">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px"
+                             height="18px">
+                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                            <path style="fill:#9FA2B4"
+                                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z"/>
+                        </svg>
+                        <div class="draft-list-content">
+                            <div class="link-masked__content">
+                                <p>Draft’s aren’t published or tracked for copyright violations</p>
+                            </div>
+                        </div>
+                    </a>
+                    <h2 class="art__title">Settings </h2>
+
+
+                </div>
+            </div>
+            <div class="art__buttons ">
+                <div class="art__select">
+                    <div class="dropdown-group dropdown-group-blue dropdown-group-middle w-100" role="group">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"><span>translate.draft.lbl_title5</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                            <li class="menu-item">
+                                <a class="item-link">translate.draft.lbl_title5</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="item-link">translate.draft.btn_saved8</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="art__buttons_wrap">
+                    <div class="art__buttons_left">
+                        <sh-filter-tab
+                                [value]="SettingsType.Account"
+                                [active]="selectedType === SettingsType.Account"
+                                (selected)="selectType($event)"
+                        >
+                            Account
+                        </sh-filter-tab>
+                        <sh-filter-tab
+                                [value]="SettingsType.YourNames"
+                                [active]="selectedType === SettingsType.YourNames"
+                                (selected)="selectType($event)"
+                        >
+                            Your names
+                        </sh-filter-tab>
+                        <sh-filter-tab
+                                [value]="SettingsType.SafeList"
+                                [active]="selectedType === SettingsType.SafeList"
+                                (selected)="selectType($event)"
+                        >
+                            Safelist
+                        </sh-filter-tab>
+                        <sh-filter-tab
+                                [value]="SettingsType.Team"
+                                [active]="selectedType === SettingsType.Team"
+                                (selected)="selectType($event)"
+                        >
+                            Team
+                        </sh-filter-tab>
+                        <sh-filter-tab
+                                [value]="SettingsType.PlanAndBilling"
+                                [active]="selectedType === SettingsType.PlanAndBilling"
+                                (selected)="selectType($event)"
+                        >
+                            Plan & Billing
+                        </sh-filter-tab>
+                    </div>
+                    <div class="art__buttons_right">
+                        <a (click)="activeInfo()" class="info-wrap toggler-trigger">
+                            <svg class="icons  icons_open-qest">
+                                <use xlink:href="assets/images/icons.svg#open-qest">
+                                </use>
+                            </svg>
+                            <div class="arrow"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <alert></alert> -->
+
+        </div>
+
+        <ng-container [ngSwitch]="selectedType">
+            <app-settings-account *ngSwitchCase="SettingsType.Account"></app-settings-account>
+            <app-settings-names *ngSwitchCase="SettingsType.YourNames"></app-settings-names>
+            <app-settings-safelist *ngSwitchCase="SettingsType.SafeList"></app-settings-safelist>
+            <app-settings-team *ngSwitchCase="SettingsType.Team"></app-settings-team>
+            <app-settings-billing *ngSwitchCase="SettingsType.PlanAndBilling"></app-settings-billing>
+        </ng-container>
+    </div>
+</main>

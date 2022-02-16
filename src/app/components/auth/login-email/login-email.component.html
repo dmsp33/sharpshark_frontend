@@ -1,0 +1,82 @@
+<div class="page" *ngIf="step == 2">
+    <div class="page-form">
+        <div class="card auth-form auto-form__space mb-0">
+            <div class="join-list__back join-list__back_offset">
+                <a (click)="onUpSteps(1)" class="action-wrap__back">
+                    <span class="arrow">
+                        <svg class="icons icons_arr-back">
+                            <use xlink:href="assets/images/icons.svg#arr-back">
+                            </use>
+                        </svg>
+                    </span>
+                    <span>
+                        {{'msgGeneric.btn_back'| translate}}
+                    </span>
+                </a>
+
+                <a href="#" class="join-list__logo join-list__logo_low">
+                    <img src="assets/images/sert/logo.svg" alt="">
+                </a>
+            </div>
+
+            <div class="join-list__descript join-list-descript">
+                <span class="join-list-descript_gray ">
+                    {{ 'auth.user_your_associated_email_or_google_account' | translate }}
+                </span>
+            </div>
+
+            <form class="form-wrap join-form" [formGroup]="loginForm" (submit)="login()">
+
+                <div class="form-group">
+                    <label class="label-text">
+                        {{ 'auth.email' | translate }}
+                    </label>
+                    <input required formControlName="user" type="text" (blur)="comprobarUsuario()" 
+                        class="form-control label-toggle" 
+                        placeholder="{{ 'auth.email_address' | translate }}" minlength="7" maxlength="50">
+                </div>
+                <div *ngIf="isValidInputUser" class="alert alert-dismissable info info__item info__item_offset-bot info__item_red info__item_width" style="min-width: calc(390px - 2.21429rem * 2) !important; max-width: calc(390px - 2.21429rem * 2) !important">
+                    {{ 'msgGeneric.email_invalid' | translate }}
+                </div>
+
+                <div class="form-group with-suffix-icon">
+                    <label class="label-text">{{ 'auth.password' | translate }}</label>
+                    <label class="label-text label-text__reminder">
+                        <!-- Forgot your password?  -->
+                        {{ 'auth.forget_password' | translate }}
+                        <a  (click)="onUpSteps(5)">
+                            <span><!-- Get a reminder -->{{ 'auth.get_a_reminder' | translate }}</span>
+                        </a>
+                    </label>
+                    
+                    
+                    <input required formControlName="password1" (blur)="comprobarClave()" 
+                        [type]="fieldTextType ? 'text' : 'password'" class="form-control label-toggle" 
+                        placeholder="{{ 'auth.password_min_8_characters' | translate }}" minlength="7" maxlength="20">
+                    <a href="#" class="suffix-icon" (click)="toggleFieldTextType()">
+                        <img *ngIf="!fieldTextType" src="assets/images/eye.svg" alt="">
+                        <img *ngIf="fieldTextType" src="assets/images/eye-open.svg" alt="">
+                    </a>
+
+                </div>
+                <div *ngIf="isValidInputPassword" 
+                class="alert alert-dismissable info info__item info__item_offset-bot info__item_red info__item_width" style="min-width: calc(390px - 2.21429rem * 2) !important; max-width: calc(390px - 2.21429rem * 2) !important">
+                    {{ 'msgGeneric.maxlenght_invalid' | translate }}
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">{{ 'auth.btn_sig_in' | translate }}</button>
+                <span (click)="onSignInWithGoogle()" class="btn btn-danger">{{ 'auth.use_google_id_instead' | translate }}</span>
+            </form>
+
+
+            <div class="auto-form__list auto-form__list_offset">
+                <div class="help-wrap">
+                    {{ 'auth.dont_have_account' | translate }}
+                    <a href="#" data-toggle="modal" data-target="#modalSignUp" (click)="onUpSteps(3)" class="fw-fw-semi-bold">
+                        {{ 'auth.sign_up' | translate }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

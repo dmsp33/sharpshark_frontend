@@ -1,0 +1,28 @@
+@use 'sass:map';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+@mixin font-desktop($font-size: 18px, $line-height: 20px) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+@mixin font-mobile($font-size: 15px, $line-height: 16px, $include-breakpoint: true) {
+  @if $include-breakpoint {
+    @include media-breakpoint-down(sm) {
+      @include font-desktop(15px, 16px);
+    }
+  } @else {
+    @include font-desktop(15px, 16px);
+  }
+}
+
+$hide-copyright-width-breakpoint: map.get($grid-breakpoints, lg);
+$hide-copyright-width: $hide-copyright-width-breakpoint + 120px;
+@mixin max-width-copyright-block() {
+  // TODO: use @include media-breakpoint-up(lg, $a) { instead current solution
+  @media (max-width: $hide-copyright-width) {
+    @content;
+  }
+}

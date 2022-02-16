@@ -1,0 +1,64 @@
+<ng-template [ngIf]="data.length">        
+    <tr class="table-row table-gray">
+        <td class="row-item"></td>
+        <td class="row-item">{{group.toUpperCase().replace('_', ' ')}}</td>
+        <td class="row-item"></td>
+    </tr>
+    <tr class="table-row" *ngFor="let documento of data; let i = index">
+        <td class="row-item row-over">
+            <p>
+                <span class="bold">{{documento.titulo}}</span>
+                {{documento.contenido }}
+            </p>
+        </td>
+        <td class="row-item">
+            <span>{{documento.updated_at | date:'dd MMM YYYY HH:mm'}}</span>
+        </td>
+        <td class="row-item dropdown">
+            <div class="vertical-m">
+            <div class="vertical-m__left">
+                <span>{{documento.updated_at | date:'dd MMM YYYY HH:mm'}}</span>
+            </div>
+            <div class="dropdown-group dropdown-group-dark">
+                <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="icon fas fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                    <a [routerLink]="['/protected-document', documento.uuid]" class="item-link button menu-item">
+                        <li class="menu-item">
+                            View Document
+                        </li>
+                    </a>
+                    <a [routerLink]="['/draft', documento.uuid]" class="item-link button menu-item">
+                        <li class="menu-item">
+                            Add a new version
+                        </li>
+                    </a>
+                    <a [routerLink]="['/certificate', documento.uuid]" target="_blank" class="item-link button menu-item">
+                        <li class="menu-item">
+                            View certificate
+                        </li>
+                    </a>
+                    <!-- <a href="#" class="item-link button menu-item">
+                        <li class="menu-item">
+                            Check alerts
+                        </li>
+                    </a>
+                    <a href="#" class="item-link button menu-item">
+                        <li class="menu-item">
+                            Check disputes
+                        </li>
+                    </a> -->
+                    <a (click)="changeStatusMonitoring(documento, 'today')" class="item-link item-link_red button menu-item text-danger">
+                        <li class="menu-item">
+                            <i class="fas fa-times mr-2"></i>
+                            Stop monitoring
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            </div>
+        </td>
+    </tr>
+</ng-template>

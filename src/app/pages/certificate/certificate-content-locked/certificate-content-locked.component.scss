@@ -1,0 +1,44 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '@imports/variables';
+@import '@components/links';
+@import '../certificate.component.mixins';
+
+.certificate-content-locked {
+  padding: 50px 95px;
+  background: $base-font-color;
+  @include media-breakpoint-down(sm) {
+    padding: 40px 60px;
+  }
+
+  &__title {
+    @include font-desktop($font-size: 24px, $line-height: 30px);
+    @include font-mobile($font-size: 22px, $line-height: 28px);
+    color: $base-font-color-invert;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  &__content {
+    @include font-desktop($font-size: 16px, $line-height: 20px);
+    @include font-mobile();
+    padding: 10px 0 45px 30px;
+    color: $base-font-color-invert;
+    border-bottom: solid 2px $base-font-color-invert;
+    @include media-breakpoint-down(sm) {
+      padding: 10px 0 30px 20px;
+    }
+
+    a.sh-link--underlined {
+      @include link-normal-state($color: $base-font-color-invert) {
+        @include underline();
+      }
+
+      @include link-active-state($color: $highlight-color) {
+        text-decoration: underline;
+        text-decoration-color: $highlight-color;
+      }
+    }
+  }
+}

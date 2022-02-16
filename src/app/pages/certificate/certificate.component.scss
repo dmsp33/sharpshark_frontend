@@ -1,0 +1,24 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.certificate {
+  max-width: 990px;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__content {
+    padding-top: 30px;
+  }
+
+  &__questions,
+  &__footer{
+    margin-top: 45px;
+    @include media-breakpoint-down(sm) {
+      margin-top: 25px;
+    }
+  }
+}

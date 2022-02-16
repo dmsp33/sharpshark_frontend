@@ -1,0 +1,25 @@
+<span [ngSwitch]="type">
+    <ng-container *ngSwitchCase="IconType.Custom">
+        <ng-container *ngIf="name === 'copy-link'">
+            <ng-container *ngTemplateOutlet="customCopyLink"></ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="IconType.MaterialIcons">
+        <span class="material-icons" [style.font-size.px]="size">{{name}}</span>
+    </ng-container>
+</span>
+
+
+<ng-template #customCopyLink>
+    <svg [attr.width]="size" [attr.height]="size" [attr.viewBox]="viewBox" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="10" height="10" stroke-width="2" class="sh-icon__element sh-icon__element--stroked"/>
+        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="12" height="12">
+            <rect x="0.5" y="0.5" width="11" height="11" stroke="black"/>
+        </mask>
+        <g mask="url(#mask0)">
+            <rect x="-3.42859" y="-3.42859" width="12" height="12.8571"
+                  class="sh-icon__element sh-icon__element--filled"/>
+        </g>
+    </svg>
+</ng-template>

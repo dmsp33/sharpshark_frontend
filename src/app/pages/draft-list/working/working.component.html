@@ -1,0 +1,247 @@
+<div class="card mb-0 card-offset  card-spase">
+  <!-- error con la clase -> card-scroll -->
+    <table class="table table-mob-alert">
+      <thead class="table-head">
+        <tr>
+            <th>TITLE</th>
+            <th>UPDATE</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        
+        <tr *ngIf="documentsToday.length == 0 && documentsWeek.length == 0 && documentsMonth.length == 0 
+        && documentsEvenEarlier.length  == 0" class="table-row table-row_border-none">
+            <td class="row-item row-over">
+                <p>
+                    Hmm, the page is blank... Once ready, your documents will appear here 
+                </p>
+            </td>
+            <td class="row-item"></td>
+            <td class="row-item dropdown"></td>
+        </tr>
+
+        <!-- <tr  class="table-row table-row_border-none"
+          *ngFor="let documento of documentos; let i = index">
+          <td class="row-item row-over">
+              <p>
+                <span class="bold">{{documento.titulo}}</span>
+                {{documento.contenido }}
+              </p>
+          </td>
+          <td class="row-item">
+            <span>{{documento.updated_at | date:'dd MMM YYYY HH:mm'}}</span>
+          </td>
+          <td class="row-item dropdown">
+            <div class="dropdown-group dropdown-group-dark">
+              <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="icon fas fa-ellipsis-v"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                <a [routerLink]="['/draft', documento.uuid]" class="item-link button menu-item">
+                  <li class="menu-item">
+                    View & edit
+                  </li>
+                </a>
+                <a  class="item-link button menu-item">
+                  <li class="menu-item">
+                    View & Protect
+                  </li>
+                </a>
+                <a  class="item-link item-link_red button menu-item text-danger"
+                  (click)="deleteDocument(documento)">
+                  <li class="menu-item">
+                    Delete
+                  </li>
+                </a>
+              </ul>
+            </div>
+          </td>
+        </tr> -->
+  
+        <!-- Today  -->
+        <ng-template [ngIf]="documentsToday.length">        
+          <tr class="table-row table-gray">
+            <td class="row-item"></td>
+            <td class="row-item">TODAY</td>
+            <td class="row-item"></td>
+          </tr>
+          <tr class="table-row" *ngFor="let documento of documentsToday; let i = index">
+            <td class="row-item row-over">
+                <p>
+                  <span class="bold">{{documento.titulo}}</span>
+                  {{documento.contenido }}
+                </p>
+            </td>
+            <td class="row-item">
+              <span>{{documento.updated_at | date:'dd MMM YYYY HH:mm'}}</span>
+            </td>
+            <td class="row-item dropdown">
+              <div class="dropdown-group dropdown-group-dark">
+                <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <i class="icon fas fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                  <a [routerLink]="['/draft', documento.uuid]" class="item-link button menu-item">
+                    <li class="menu-item">
+                      View & edit
+                    </li>
+                  </a>
+                  <a [routerLink]="['/draft', documento.uuid]" class="item-link button menu-item">
+                    <li class="menu-item">
+                      View & Protect
+                    </li>
+                  </a>
+                  <a  class="item-link item-link_red button menu-item text-danger"
+                    (click)="deleteDocument(documento, 'today')">
+                    <li class="menu-item">
+                      Delete
+                    </li>
+                  </a>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <!-- Earlier this week  -->
+        <ng-template [ngIf]="documentsWeek.length">        
+          <tr class="table-row table-gray">
+            <td class="row-item"></td>
+            <td class="row-item">EARLIER THIS WEEK</td>
+            <td class="row-item"></td>
+          </tr>
+          <tr class="table-row" *ngFor="let documento of documentsWeek; let i = index">
+            <td class="row-item row-over">
+                <p>
+                  <span class="bold">{{documento.titulo}}</span>
+                  {{documento.contenido }}
+                </p>
+            </td>
+            <td class="row-item">
+              <span>{{documento.updated_at | date:'dd MMM YYYY HH:mm'}}</span>
+            </td>
+            <td class="row-item dropdown">
+              <div class="dropdown-group dropdown-group-dark">
+                <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <i class="icon fas fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                  <a [routerLink]="['/draft', documento.uuid]" class="item-link button menu-item">
+                    <li class="menu-item">
+                      View & edit
+                    </li>
+                  </a>
+                  <a  class="item-link button menu-item">
+                    <li class="menu-item">
+                      View & Protect
+                    </li>
+                  </a>
+                  <a  class="item-link item-link_red button menu-item text-danger"
+                    (click)="deleteDocument(documento, 'week')">
+                    <li class="menu-item">
+                      Delete
+                    </li>
+                  </a>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <!-- Earlier this month  -->
+        <ng-template [ngIf]="documentsMonth.length">        
+          <tr class="table-row table-gray">
+            <td class="row-item"></td>
+            <td class="row-item">EARLIER THIS MONTH</td>
+            <td class="row-item"></td>
+          </tr>
+          <tr class="table-row" *ngFor="let documento of documentsMonth; let i = index">
+            <td class="row-item row-over">
+                <p>
+                  <span class="bold">{{documento.titulo}}</span>
+                  {{documento.contenido }}
+                </p>
+            </td>
+            <td class="row-item">
+              <span>{{documento.updated_at | date:'dd MMM YYYY HH:mm'}}</span>
+            </td>
+            <td class="row-item dropdown">
+              <div class="dropdown-group dropdown-group-dark">
+                <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <i class="icon fas fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                  <a [routerLink]="['/draft', documento.uuid]" class="item-link button menu-item">
+                    <li class="menu-item">
+                      View & edit
+                    </li>
+                  </a>
+                  <a  class="item-link button menu-item">
+                    <li class="menu-item">
+                      View & Protect
+                    </li>
+                  </a>
+                  <a  class="item-link item-link_red button menu-item text-danger"
+                    (click)="deleteDocument(documento, 'month')">
+                    <li class="menu-item">
+                      Delete
+                    </li>
+                  </a>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        
+        <!-- Even Earlier  -->
+        <ng-template [ngIf]="documentsEvenEarlier.length">        
+          <tr class="table-row table-gray">
+            <td class="row-item"></td>
+            <td class="row-item">EVEN EARLIER</td>
+            <td class="row-item"></td>
+          </tr>
+          <tr class="table-row" *ngFor="let documento of documentsEvenEarlier; let i = index">
+            <td class="row-item row-over">
+                <p>
+                  <span class="bold">{{documento.titulo}}</span>
+                  {{documento.contenido }}
+                </p>
+            </td>
+            <td class="row-item">
+              <span>{{documento.updated_at | date:'dd MMM YYYY HH:mm'}}</span>
+            </td>
+            <td class="row-item dropdown">
+              <div class="dropdown-group dropdown-group-dark">
+                <button type="button" class="btn dropdown-toggle no-style" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <i class="icon fas fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-wide">
+                  <a [routerLink]="['/draft', documento.uuid]" class="item-link button menu-item">
+                    <li class="menu-item">
+                      View & edit
+                    </li>
+                  </a>
+                  <a  class="item-link button menu-item">
+                    <li class="menu-item">
+                      View & Protect
+                    </li>
+                  </a>
+                  <a  class="item-link item-link_red button menu-item text-danger"
+                    (click)="deleteDocument(documento, 'even_earlier')">
+                    <li class="menu-item">
+                      Delete
+                    </li>
+                  </a>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>

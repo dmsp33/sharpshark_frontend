@@ -1,0 +1,116 @@
+@use 'sass:color';
+@import '@imports/variables';
+@import '@components/links';
+@import '@components/typography';
+
+$hover-row-color: #2e2d55;
+$hover-row-link-color: #938FFF;
+
+.certificate-history-modal {
+  &.show {
+    display: flex !important;
+    color: $base-font-color-invert;
+    background: transparentize($highlight-faded-color, 0.4);
+  }
+
+  .modal-dialog {
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .modal-content {
+    background: $base-font-color;
+    border-radius: 0;
+    min-height: 100%;
+  }
+
+  .modal-body {
+    @include font-desktop();
+    @include font-mobile();
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+  }
+
+  a.sh-link--underlined {
+    @include link-normal-state($color: $base-font-color-invert) {
+      @include underline();
+    }
+
+    @include link-active-state($color: $hover-row-link-color) {
+      text-decoration: underline;
+      text-decoration-color: $hover-row-link-color;
+    }
+  }
+
+  &__close-button {
+    text-shadow: none;
+    color: $base-font-color-invert;
+    background: transparent;
+    border: none;
+  }
+
+  &__title {
+    @include font-desktop($font-size: 24px, $line-height: 30px);
+    color: $base-font-color-invert;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+
+    &--offset-top {
+      margin-top: 24px;
+    }
+  }
+
+  &__table-header-row {
+    align-items: flex-end;
+    margin-bottom: 16px;
+  }
+
+  &__row {
+    @include transition();
+    align-items: flex-end;
+    padding: 10px 0;
+
+    &:hover {
+      background: $hover-row-color;
+    }
+  }
+
+  &__column-title {
+    align-self: flex-start;
+  }
+
+  sh-icon + &__column-title-text {
+    margin-left: 10px;
+  }
+
+  &__information {
+    margin-top: 8px;
+  }
+
+  &__information-item-icon {
+    display: inline-block;
+    min-width: 25px;
+
+    sh-icon {
+      vertical-align: middle;
+    }
+  }
+
+  &__information-item {
+    margin-left: 24px;
+  }
+
+  &__other-versions-scroll-container {
+    min-height: 100px;
+    flex: 1;
+    margin-left: -15px;
+    margin-right: -15px;
+    max-width: unset;
+
+    .certificate-history-modal__row {
+      padding-left: 15px;
+    }
+  }
+}

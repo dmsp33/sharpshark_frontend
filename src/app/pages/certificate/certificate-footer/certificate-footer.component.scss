@@ -1,0 +1,89 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '@imports/variables';
+@import '../certificate.component.mixins';
+
+$line-thickness: 2px;
+$padding-footer: 20px;
+
+.certificate-footer {
+  padding: $padding-footer 0;
+  position: relative;
+
+  &__develop {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 15px;
+    }
+
+    &-founded {
+      font-size: 18px;
+      line-height: 20px;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 15px;
+        white-space: pre-line;
+      }
+    }
+
+    &-powered {
+      font-size: 12px;
+      line-height: 20px;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 15px;
+      }
+    }
+  }
+
+  &__logo {
+    img {
+      height: 34px;
+      width: 34px;
+      margin: 0 3px
+    }
+  }
+
+  &__suggestion {
+    display: flex;
+    justify-content: flex-end;
+
+    sh-certificate-application-suggestion {
+      @include media-breakpoint-down(sm) {
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        z-index: 10;
+      }
+    }
+  }
+
+  &__copyright {
+    position: fixed;
+    bottom: 0;
+    left: calc((100vw - #{$hide-copyright-width-breakpoint}) / 2 - 100px);
+    padding: 0;
+    margin-top: 25px;
+    transform: rotate(-90deg) translate(50%, -100%);
+    width: auto;
+    @include max-width-copyright-block() {
+      position: static;
+      transform: none;
+      text-align: center;
+    }
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $line-thickness;
+    background: $base-font-color;
+    @include media-breakpoint-down(sm) {
+      width: 99999999px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import '@imports/variables';
+@import '@components/typography';
+
+.toast-action-result {
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: none;
+  color: $base-font-color-invert;
+  background: $base-font-color;
+
+  &__body {
+    padding: 16px 24px;
+    @include font-desktop();
+    @include font-mobile();
+  }
+
+  &--visible {
+    display: inline-block;
+    opacity: 1;
+  }
+}
+

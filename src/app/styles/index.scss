@@ -1,0 +1,9 @@
+@import 'vendors/vendors';
+@import '@imports/variables';
+@import 'imports/@components/index';
+
+@import 'src/app/pages/certificate/certificate.component.override';
+
+body {
+  letter-spacing: $base-letter-spacing;
+}

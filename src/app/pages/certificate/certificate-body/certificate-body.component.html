@@ -1,0 +1,148 @@
+<div class="certificate-body">
+    <div class="certificate-body__item certificate-body__item--underlined certificate-body__copyright">
+        <div class="row">
+            <div class="certificate-body__key col-3 cols-sm-2 col-md-6 col-lg-6 order-md-0">
+                {{ 'certificate.title' | translate }}
+            </div>
+            <div class="certificate-body__value col-9 cols-sm-10 col-md-6 col-lg-6 order-md-2">
+                <span *ngIf="!certificate.bloqueado; else lockedTitleTemplate" class="certificate-title">
+                    {{ certificate.titulo }}
+                </span>
+                <ng-template #lockedTitleTemplate>
+                    <span class="certificate-title certificate-title--locked">
+                        {{ 'certificate.locked_status' | translate }}
+                    </span>
+                </ng-template>
+            </div>
+            <div class="certificate-body__key col-3 cols-sm-2 col-md-6 col-lg-6 order-md-1">
+                {{ 'certificate.author' | translate }}
+            </div>
+            <div class="certificate-body__value col-9 cols-sm-10 col-md-6 col-lg-6 order-md-4">
+                {{ certificate.autor }}
+            </div>
+        </div>
+    </div>
+    <div class="certificate-body__item certificate-body__item--underlined certificate-body__quote-authors">
+        <div class="row">
+            <div class="certificate-body__value col-12">
+                {{ 'certificate.authors_rights' | translate }}
+            </div>
+            <div class="certificate-body__value col-12">
+                {{ 'certificate.quote_author_content' | translate }}
+            </div>
+        </div>
+    </div>
+    <div class="certificate-body__item certificate-body__history">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 d-none d-md-flex">
+                <ngx-kjua
+                        [text]="certificate.traza"
+                        [renderAsync]="false"
+                        [render]="'svg'"
+                        [crisp]="false"
+                        [quiet]="0"
+                        [minVersion]="1"
+                        [ecLevel]="'H'"
+                        [size]="74"
+                        [fill]="'#0C0226'"
+                        [back]="''"
+                        class="qr-code qr-code--hoverable"
+                ></ngx-kjua>
+                <div class="certificate-body-history">
+                    <div class="certificate-body-history__top">
+                        {{ 'certificate.publish_info.publish' | translatePart: 0 }}
+                        {{ 'certificate.publish_info.publish' | translatePart: 1:{dateTime: (certificate.created_at | dateUTC: DateFormats.Extended)} }}
+                        <ng-container *ngIf="certificate.version > 1">
+                            <br>
+                            <a (click)="modal.open($event)"
+                               [bTooltip]="'certificate.publish_info.desktop.update_info' | translate"
+                               [placement]="'bottom'"
+                               href="#"
+                               class="sh-link sh-link--underlined"
+                            >
+                                {{ 'certificate.publish_info.publish_updated' | translatePart: 0 }}
+                                {{ 'certificate.publish_info.publish_updated' | translatePart: 1: {
+                                dateTime: (certificate.updated_at | dateUTC: DateFormats.Simple: false),
+                                version: certificate.version
+                            } }}
+                            </a>
+                        </ng-container>
+                    </div>
+                    <div class="certificate-body-history__bottom">
+                        <a [href]="certificate.traza" target="_blank" class="sh-link sh-link--underlined">
+                            {{ 'certificate.publish_info.desktop.check_blockchain_link' | translate }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 d-none d-md-flex">
+                <ngx-kjua
+                        [text]="certificate.ipfs"
+                        [renderAsync]="false"
+                        [render]="'svg'"
+                        [crisp]="false"
+                        [quiet]="0"
+                        [minVersion]="1"
+                        [ecLevel]="'H'"
+                        [size]="74"
+                        [fill]="'#0C0226'"
+                        [back]="''"
+                        [cssClass]="'qr'"
+                        class="qr-code qr-code--hoverable"
+                ></ngx-kjua>
+                <div class="certificate-body-history">
+                    <div class="certificate-body-history__top">
+                        {{ 'certificate.publish_info.desktop.immutable_form' | translate }}
+                    </div>
+                    <div class="certificate-body-history__bottom">
+                        <a [bTooltip]="'certificate.publish_info.desktop.ipfs_description' | translate"
+                           [placement]="'bottom'"
+                           [href]="certificate.ipfs" target="_blank" class="sh-link sh-link--underlined">
+                            {{ 'certificate.publish_info.desktop.ipfs_proof' | translate }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="certificate-body__key col-4 col-sm-4 d-md-none">
+                {{ 'certificate.publish_info.publish' | translatePart: 0 }}
+            </div>
+            <div class="certificate-body__value col-8 col-sm-8 d-md-none">
+                {{ 'certificate.publish_info.publish' | translatePart: 1:{dateTime: (certificate.created_at | dateUTC: DateFormats.Extended)} }}
+            </div>
+            <ng-container *ngIf="certificate.version > 1">
+                <div class="certificate-body__key col-4 col-sm-4 d-md-none">
+                    {{ 'certificate.publish_info.publish_updated' | translatePart: 0 }}
+                </div>
+                <div class="certificate-body__value col-8 col-sm-8 d-md-none">
+                    <a (click)="modal.open($event)" href="#" class="sh-link sh-link--underlined">
+                        {{ 'certificate.publish_info.publish_updated' | translatePart: 1: {
+                        dateTime: (certificate.updated_at | dateUTC: DateFormats.Simple:false),
+                        version: certificate.version
+                    } }}
+                    </a>
+                </div>
+            </ng-container>
+            <div class="certificate-body__key col-4 col-sm-4 d-md-none">
+                {{ 'certificate.publish_info.mobile.full_history_title' | translate }}
+            </div>
+            <div class="certificate-body__value col-8 col-sm-8 d-md-none">
+                <a [href]="certificate.traza" target="_blank" class="sh-link sh-link--underlined">
+                    {{ 'certificate.publish_info.mobile.full_history_value' | translate }}
+                </a>
+            </div>
+            <div class="certificate-body__key col-4 col-sm-4 d-md-none">
+                {{ 'certificate.publish_info.mobile.content_title' | translate }}
+            </div>
+            <div class="certificate-body__value col-8 col-sm-8 d-md-none">
+                <a [href]="certificate.ipfs" target="_blank" class="sh-link sh-link--underlined">
+                    {{ 'certificate.publish_info.mobile.content_value' | translate }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<sh-certificate-history
+        [certificateCurrentVersion]="certificate"
+        [certificateOtherVersions]="certificateOtherVersions"
+        #modal
+></sh-certificate-history>

@@ -1,0 +1,209 @@
+<div #modal tabindex="-1" role="dialog" aria-hidden="true" class="modal fade certificate-history-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ng-container *ngTemplateOutlet="currentVersionTemplate"></ng-container>
+                <ng-container *ngTemplateOutlet="otherVersionsTemplate"></ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #currentVersionTemplate>
+    <div class="row">
+        <div class="d-none d-md-flex col-md-11 col-lg-11">
+            <h2 class="certificate-history-modal__title">{{ 'certificate.history.current_version' | translate }}</h2>
+        </div>
+        <div class="col-11 col-sm-11 d-md-none">
+            <h2 class="certificate-history-modal__title">{{ 'certificate.history.current_version_mobile' | translate }}</h2>
+        </div>
+        <div class="col-1 col-sm-1 col-md-1 col-lg-1">
+            <button type="button" data-dismiss="modal" class="certificate-history-modal__close-button">
+                <sh-icon [name]="'material-icons:close'" [size]="25"></sh-icon>
+            </button>
+        </div>
+    </div>
+    <div class="row certificate-history-modal__table-header-row">
+        <div class="d-none d-md-flex col-md-6 col-lg-6">
+            {{ 'certificate.history.title' | translate }}
+        </div>
+        <div class="d-none d-md-flex col-md-6 col-lg-6">
+            {{ 'certificate.history.version_date_title' | translate }}
+        </div>
+        <div class="col-12 col-sm-12 d-md-none">
+            {{ 'certificate.history.version_date_title_mobile' | translate }}
+        </div>
+    </div>
+    <div class="row certificate-history-modal__row">
+        <div class="certificate-history-modal__column-title d-none d-md-flex col-md-6 col-lg-6">
+            <ng-container
+                    *ngTemplateOutlet="lockUnlockIcon; context: { certificate: certificateCurrentVersion }"></ng-container>
+            <div class="certificate-history-modal__column-title-text">{{ certificateCurrentVersion?.titulo }}</div>
+        </div>
+        <div class="certificate-history-modal__column-title col-12 col-sm-12 d-md-none">
+            <div class="certificate-history-modal__column-title-text">{{ certificateCurrentVersion?.titulo }}</div>
+        </div>
+        <div class="d-none d-md-flex col-md-4 col-lg-4">
+            <div>
+                <div>
+                    <ng-container
+                            *ngTemplateOutlet="versionStatusTemplate; context: { certificate: certificateCurrentVersion }"></ng-container>
+                </div>
+                <div>
+                    <ng-container
+                            *ngTemplateOutlet="createUpdateDateTemplate; context: { certificate: certificateCurrentVersion, isFirstPublish: certificateOtherVersions.length === 0 }"></ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="d-none d-md-flex col-md-2 col-lg-2">
+            <a (click)="$event.preventDefault()" href="#" data-dismiss="modal" class="sh-link sh-link--underlined">
+                {{ 'certificate.history.go_back' | translate }}
+            </a>
+        </div>
+        <div class="certificate-history-modal__column-title col-12 col-sm-12 d-md-none">
+            <div class="certificate-history-modal__column-title-text"></div>
+        </div>
+        <div class="certificate-history-modal__information col-12 col-sm-12 d-md-none">
+            <span class="certificate-history-modal__information-item-icon">
+                {{ 'certificate.history.version' | translate: {version: certificateCurrentVersion.version} }}
+            </span>
+            <span class="certificate-history-modal__information-item">
+                <ng-container
+                        *ngTemplateOutlet="createUpdateDateTemplate; context: { certificate: certificateCurrentVersion, isFirstPublish: certificateOtherVersions.length === 0 }"></ng-container>
+            </span>
+        </div>
+        <div *ngIf="!isNeverLocked(certificateCurrentVersion)"
+             class="certificate-history-modal__information col-12 col-sm-12 d-md-none">
+            <span class="certificate-history-modal__information-item-icon">
+                <ng-container
+                        *ngTemplateOutlet="lockUnlockIcon; context: { certificate: certificateCurrentVersion }"></ng-container>
+            </span>
+            <span class="certificate-history-modal__information-item">
+                <ng-container
+                        *ngTemplateOutlet="statusTemplate; context: { certificate: certificateCurrentVersion }"></ng-container>
+            </span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #otherVersionsTemplate>
+    <div class="row">
+        <div class="d-none d-md-flex col-md-12 col-lg-12">
+            <h2 class="certificate-history-modal__title certificate-history-modal__title--offset-top">
+                {{ 'certificate.history.other_versions' | translate: {count: certificateOtherVersions?.length} }}
+            </h2>
+        </div>
+        <div class="col-12 col-sm-12 d-md-none">
+            <h2 class="certificate-history-modal__title certificate-history-modal__title--offset-top">
+                {{ 'certificate.history.other_versions' | translate: {count: certificateOtherVersions?.length} }}
+            </h2>
+        </div>
+    </div>
+    <ng-scrollbar
+            [pointerEventsDisabled]="false"
+            [track]="'vertical'"
+            [appearance]="'standard'"
+            [pointerEventsMethod]="'scrollbar'"
+            [thumbClass]="'certificate-history-modal__other-versions-scroll-thumb'"
+            [trackClass]="'certificate-history-modal__other-versions-scroll-track'"
+            class="certificate-history-modal__other-versions-scroll-container"
+    >
+        <div *ngFor="let certificate of certificateOtherVersions; let isLast = last"
+             class="row certificate-history-modal__row">
+            <div class="certificate-history-modal__column-title d-none d-md-flex col-md-6 col-lg-6">
+                <ng-container
+                        *ngTemplateOutlet="lockUnlockIcon; context: { certificate: certificate }"></ng-container>
+                <div class="certificate-history-modal__column-title-text">{{ certificate?.titulo }}</div>
+            </div>
+            <div class="certificate-history-modal__column-title col-12 col-sm-12 d-md-none">
+                <div class="certificate-history-modal__column-title-text">
+                    <a [href]="certificate.traza" target="_blank" class="sh-link sh-link--underlined">
+                        {{ certificate?.titulo }}
+                    </a>
+                </div>
+            </div>
+            <div class="d-none d-md-flex col-md-4 col-lg-4">
+                <div>
+                    <div>
+                        <ng-container
+                                *ngTemplateOutlet="versionStatusTemplate; context: { certificate: certificate }"></ng-container>
+                    </div>
+                    <div>
+                        <ng-container
+                                *ngTemplateOutlet="createUpdateDateTemplate; context: { certificate: certificate, isFirstPublish: isLast }"></ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-md-flex col-md-2 col-lg-2">
+                <a [href]="certificate.traza" target="_blank" class="sh-link sh-link--underlined">
+                    {{ 'certificate.history.check' | translate }}
+                </a>
+            </div>
+            <div class="certificate-history-modal__information col-12 col-sm-12 d-md-none">
+            <span class="certificate-history-modal__information-item-icon">
+                {{ 'certificate.history.version' | translate: {version: certificate.version} }}
+            </span>
+                <span class="certificate-history-modal__information-item">
+                <ng-container
+                        *ngTemplateOutlet="createUpdateDateTemplate; context: { certificate: certificate, isFirstPublish: certificateOtherVersions.length === 0 }"></ng-container>
+            </span>
+            </div>
+            <div *ngIf="!isNeverLocked(certificate)"
+                 class="certificate-history-modal__information col-12 col-sm-12 d-md-none">
+            <span class="certificate-history-modal__information-item-icon">
+                <ng-container
+                        *ngTemplateOutlet="lockUnlockIcon; context: { certificate: certificate }"></ng-container>
+            </span>
+                <span class="certificate-history-modal__information-item">
+                <ng-container
+                        *ngTemplateOutlet="statusTemplate; context: { certificate: certificate }"></ng-container>
+            </span>
+            </div>
+        </div>
+    </ng-scrollbar>
+</ng-template>
+
+<ng-template #versionStatusTemplate let-certificate="certificate">
+    <ng-container *ngIf="isNeverLocked(certificate); else versionStatusWasLockedTemplate">
+        {{ 'certificate.history.version_status_never_locked' | translate: {version: certificate.version} }}
+    </ng-container>
+    <ng-template #versionStatusWasLockedTemplate>
+        <ng-container *ngIf="certificate.bloqueado; else versionStatusUnlockedTemplate">
+            {{ 'certificate.history.version_status_locked' | translate: {version: certificate.version} }}
+        </ng-container>
+        <ng-template #versionStatusUnlockedTemplate>
+            {{ 'certificate.history.version_status_unlocked' | translate: {version: certificate.version} }}
+        </ng-template>
+    </ng-template>
+</ng-template>
+
+<ng-template #statusTemplate let-certificate="certificate">
+    <ng-container *ngIf="!isNeverLocked(certificate);">
+        <ng-container *ngIf="certificate.bloqueado; else statusUnlockedTemplate">
+            {{ 'certificate.history.status_locked' | translate: {version: certificate.version} }}
+        </ng-container>
+        <ng-template #statusUnlockedTemplate>
+            {{ 'certificate.history.status_unlocked' | translate: {version: certificate.version} }}
+        </ng-template>
+    </ng-container>
+</ng-template>
+
+<ng-template #createUpdateDateTemplate let-certificate="certificate" let-isFirstPublish="isFirstPublish">
+    <ng-container *ngIf="isFirstPublish">
+        {{ certificate.created_at | dateUTC: DateFormats.Extended }}
+    </ng-container>
+    <ng-container *ngIf="!isFirstPublish">
+        {{ certificate.updated_at | dateUTC: DateFormats.Extended }}
+    </ng-container>
+</ng-template>
+
+<ng-template #lockUnlockIcon let-certificate="certificate">
+    <ng-container *ngIf="!isNeverLocked(certificate)">
+        <ng-container *ngIf="certificate.bloqueado; else unlockedIconTemplate">
+            <sh-icon [name]="'material-icons:lock'" [size]="18"></sh-icon>
+        </ng-container>
+        <ng-template #unlockedIconTemplate>
+            <sh-icon [name]="'material-icons:lock_open'" [size]="18"></sh-icon>
+        </ng-template>
+    </ng-container>
+</ng-template>

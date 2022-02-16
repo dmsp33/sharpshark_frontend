@@ -1,0 +1,50 @@
+$create-document-button-background-color: #5a3dd1;
+$create-document-button-box-shadow-color: #5a3dd1;
+
+.btn-sign {
+    cursor: pointer;
+    width: 100%;
+    min-height: 3.42857rem;
+    line-height: 1;
+    padding: 12px 16px;
+    border: 1px solid #938FFF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: none;
+    // box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
+    color: #938FFF;
+    display: inline-flex;
+    font-weight: 500;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.3px;
+  }
+  
+  .btn-sign:hover {
+    color: #ffffff;
+  }
+  
+  .salir:hover {
+    color: black !important;
+  }
+
+.circle img {
+  border-radius: 50%;
+}
+
+.create-document-button {
+  display: block;
+  padding: 14px 24px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #FFFFFF;
+
+  background: $create-document-button-background-color;
+  box-shadow: 0 4px 12px transparentize($create-document-button-box-shadow-color, 0.76);
+  border-radius: 4px;
+}

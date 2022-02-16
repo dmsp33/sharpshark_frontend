@@ -1,0 +1,45 @@
+@import '@imports/variables';
+@import '@imports/mixins';
+@import 'typography';
+
+@mixin link-normal-state($color: $base-font-color, $icon-color: $base-font-color) {
+  &:link,
+  &:visited,
+  &:active {
+    @include icon-color($icon-color);
+    @include transition();
+    color: $color;
+    @content;
+  }
+}
+
+@mixin link-active-state($color: $highlight-color, $icon-color: $highlight-color) {
+  &:hover,
+  &:focus {
+    @include icon-color($icon-color);
+    color: $color;
+    @content;
+  }
+}
+
+
+a.sh-link {
+  @include link-normal-state() {
+    text-decoration: none;
+  }
+
+  @include link-active-state() {
+    text-decoration: none;
+  }
+}
+
+a.sh-link--underlined {
+  @include link-normal-state() {
+    @include underline();
+  }
+
+  @include link-active-state($color: $base-font-color) {
+    text-decoration: underline;
+    text-decoration-color: $highlight-color;
+  }
+}

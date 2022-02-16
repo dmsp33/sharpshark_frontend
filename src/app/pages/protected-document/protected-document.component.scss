@@ -1,0 +1,25 @@
+.color-href{
+    color: white;
+}
+
+.color_link2{
+    color:red;
+}
+
+a.link2:hover {
+    outline: none;
+    color:white;
+}
+
+a.link:hover {
+    outline: none;
+    color:#0056b3;
+}
+
+.art__buttons_wrap {
+    .art__buttons_left {
+        sh-filter-tab {
+            margin-right: 12px;
+        }
+    }
+}

@@ -1,0 +1,110 @@
+<div class="modal fade " id="modalSF" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-transparent">
+            <div class="modal-s__container">
+
+                <div class="scroll-content-y_reset overflow-auto">
+                    <div class="content-wrap__head-wrap">
+                        <h1>Safelist of websites</h1>
+                    </div>
+                    <p class="content-per">
+                        If the document is published on a website from this list, we won’t consider it a violation 
+                    </p>
+
+
+                    <form [formGroup]="form">
+                        <div class="modal-body modal-safelist px-0">
+
+                            <div class="modal-recontent active-cir modal-recontent_offset mb-3">  
+                                <div class="form-group with-suffix-icon field-divider ">
+                                    <label class="label-text">Your organization (safe by default)</label>
+                                    <input type="text" class="form-control label-toggle form-control__disabled" disabled placeholder="Enter an email" value="{{ defaultEmail }}">
+                                </div>
+                                <a class="modal-recontent__circle">
+
+                                </a>
+                            
+                            </div>
+            
+                            <span style="font-weight: bold;" class="label-text text-uppercase text-sm">Other websites</span>
+                               
+
+                            <div class="modal-recontent modal-recontent_offset">
+                                <div class="form-group with-suffix-icon field-divider ">
+                                    <input formControlName="url" name="a1"  [ngClass] = "{ 'input-stick': url1.show == false  }" type="text" class="form-control label-toggle"placeholder="Enter the URL" [value]="url1">
+                                    <div *ngIf="f.url.touched && f.url.invalid" class="alert alert-danger">
+                                        <div *ngIf="f.url.errors && f.url.errors.required">URL is required.</div>
+                                        <div *ngIf="f.url.errors && f.url.errors.pattern">Please enter valid url.</div>
+                                    </div>
+                                </div>
+                                <a (click)="url1.show = !url1.show" *ngIf="url1.show; else Reverse" class="modal-recontent__circle">
+
+                                </a>
+                                  <ng-template #Reverse item="url1">
+
+                                     <div class="d-flex align-items-center">
+                                         
+                                        <img (click)="item = !item" src="assets/images/undo_24px.svg" alt="">
+                                     </div>
+                                </ng-template>
+                            </div>
+
+                            <div class="modal-recontent modal-recontent_offset">
+                                <div class="form-group with-suffix-icon field-divider ">
+                                    <input formControlName="url2" name="a1" [ngClass] = "{ 'input-stick': url2.show == false  }" type="text" class="form-control label-toggle"placeholder="Enter the URL" value="{{ url2.url }}" >
+                                    <div *ngIf="f.url2.touched && f.url2.invalid" class="alert alert-danger">
+                                        <!-- <div *ngIf="f.url2.errors.required">URL is required.</div> -->
+                                        <div *ngIf="f.url2.errors && f.url2.errors.pattern">Please enter valid url.</div>
+                                    </div>
+                                </div>
+                                <a (click)="url2.show = !url2.show" *ngIf="url2.show; else Reverse" class="modal-recontent__circle">
+
+                                </a>
+                                  <ng-template #Reverse url2="url2">
+
+                                     <div class="d-flex align-items-center">
+                                         
+                                        <img (click)="url2.show = !url2.show" src="assets/images/undo_24px.svg" alt="">
+                                     </div>        
+                                </ng-template>
+                            </div>
+
+                            <div class="modal-recontent modal-recontent_offset">
+                                <div class="form-group with-suffix-icon field-divider ">
+                                    <input formControlName="url3" name="a1"  [ngClass] = "{ 'input-stick': url3.show == false  }" type="text" class="form-control label-toggle"placeholder="Enter the URL" value="{{ url3.url }}">
+                                    <div *ngIf="f.url3.touched && f.url3.invalid" class="alert alert-danger">
+                                        <!-- <div *ngIf="f.url3.errors.required">URL is required.</div> -->
+                                        <div *ngIf="f.url3.errors && f.url3.errors.pattern">Please enter valid url.</div>
+                                    </div>
+                                </div>
+                                <a (click)="url3.show = !url3.show" *ngIf="url3.show; else Reverse" class="modal-recontent__circle">
+
+                                </a>
+                                <ng-template #Reverse url3="url3">
+                                    <div class="d-flex align-items-center">
+                                        
+                                        <img (click)="url3.show = !url3.show" src="assets/images/undo_24px.svg" alt="">
+                                    </div>
+                                </ng-template>
+                            </div> 
+                        </div>
+
+                        <hr>
+                
+                        <div class="text-right justify-content-end mt-2 py-2" style="width: 100%; display: block;">
+                            <button (click)="hideModal()" class="art__close" type="button" data-toggle="tooltip">
+                                Cancel
+                            </button>
+                            <button [disabled]="!form.valid" (click)="Save()" class="btn btn-sh-primary" type="button" data-toggle="tooltip">
+                                Save
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

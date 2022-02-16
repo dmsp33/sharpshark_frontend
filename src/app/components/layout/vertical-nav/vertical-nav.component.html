@@ -1,0 +1,271 @@
+<div class="vertical-nav">
+    <div class="vertical-drop" [ngClass]="{'active': mostrarOcultar}">
+        <div *ngIf="!showOnlyLogged" class="logo-wrap logo-wrap_row">
+            <div style="width: 100%;">
+                <a (click)="showModalL()" class="btn-sign">{{ 'principal.signin_or_signup' | translate }}</a>
+            </div>
+        </div>
+
+        <div *ngIf="showOnlyLogged && user" class="logo-wrap logo-wrap_row">
+
+            <div class="logo-wrap__left" (click)="mostrarOcultarMenuSalir()" style="cursor: pointer;">
+                <div class="circle-rote circle-rote-primery circle">
+                    <img *ngIf="user.profile_photo_url != null || user.profile_photo_url != undefined" src="{{user.profile_photo_url }}" alt="" class="">
+                    <span *ngIf="!user.profile_photo_url">{{user.initials}}</span>
+                    <!-- <span>usrInitials</span> -->
+                </div>
+                <div class="logo-wrap__col">
+                    <span class="logo-wrap_name">{{user.name}}</span>
+                    <span class="logo-wrap_mail">{{user.email}}</span>
+                </div>
+            </div>
+
+            <a class="logo-wrap__arrow" (click)="mostrarOcultarMenuSalir()" style="cursor: pointer;">&nbsp;</a>
+
+            <div class="dropdown-widget">
+                <a (click)="logoutUser()" class="button button_red-t salir" style="cursor: pointer; margin-top: 8px">
+                    Sign out
+                </a>
+            </div>
+        </div>
+
+        <div class="logo-wrap__coll">
+            <a routerLink="/draft" class="logo-wrap__btn"><span></span></a>
+            <span>translate.principal.lbl_new_doc</span>
+        </div>
+
+        <div class="vertical-drop__button">
+            <a routerLink="/draft" routerLinkActive="active" class="create-document-button">
+                {{ 'principal.create_doc' | translate }} (3 left)
+            </a>
+        </div>
+
+    </div>
+
+    <ul class="navbar-wrap navbar-wrap__space">
+
+        <div class="navbar-wrap__top">
+            <li class="nav-item">
+                <a routerLink="/draft-list" class="item-link " routerLinkActive="active">
+                    <div class="item-link__row">
+                        <div class="item-link__leftsite">
+                            <svg class="icons icons_offset-left icons_color icons_burg">
+                                <use xlink:href="assets/images/icons.svg#burg">
+                                </use>
+                            </svg>
+                            <span class="item-text">{{ 'principal.draft' | translate }}</span>
+                        </div>
+                        <div class="item-link__rightsite">
+                            <span>{{countDraft}}</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item nav-item_border">
+                <a routerLink="/protected" class="item-link" routerLinkActive="active">
+                    <div class="item-link__row">
+                        <div class="item-link__leftsite">
+                            <svg class="icons icons_offset-left icons_color icons_armom">
+                                <use xlink:href="assets/images/icons.svg#armom">
+                                </use>
+                            </svg>
+                            <span class="item-text">{{ 'principal.protected' | translate }}</span>
+                        </div>
+                        <div class="item-link__rightsite">
+                            <span>{{countProtected}}</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item nav-item_offset">
+                <div class="nav-item_subtitle">
+                    <span>
+                        {{ 'principal.copyright' | translate }}
+                    </span>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/alerts" class="item-link item-link_col" routerLinkActive="active">
+                    <div class="item-link__row">
+                        <div class="item-link__leftsite">
+                            <svg class="icons icons_offset-left icons_color icons_copyrite">
+                                <use xlink:href="assets/images/icons.svg#copyrite">
+                                </use>
+                            </svg>
+                            <span class="item-text">{{ 'principal.alert' | translate }}</span>
+                        </div>
+                        <div class="item-link__rightsite">
+                            <span *ngIf="countAlerts == 0 && countNewAlerts == 0">
+                                0
+                            </span>
+
+                            <span *ngIf="countAlerts != 0 && countNewAlerts == 0" class="badge rounded badge-neutral">
+                                {{ countAlerts }}
+                            </span>
+
+                            <span *ngIf="countAlerts == 0 && countNewAlerts != 0" class="badge rounded badge-error">
+                                {{ countNewAlerts }}
+                            </span>
+
+                            <span *ngIf="countAlerts != 0 && countNewAlerts != 0" class="badge rounded badge-error">
+                                {{ countNewAlerts }} / {{ countAlerts }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="nav-item_descript">
+                        <p *ngIf="countAlerts == 0 && countNewAlerts == 0">
+                            {{ 'principal.all_clear_we_notice' | translate }}
+                        </p>
+
+                        <p *ngIf="countAlerts == 1 && countNewAlerts == 0">
+                            {{ 'principal.already_saw_alert' | translate }}
+                        </p>
+                        <p *ngIf="countAlerts > 1 && countNewAlerts == 0">
+                            {{ 'principal.already_saw_alerts' | translate }}
+                        </p>
+
+                        <p *ngIf="countAlerts == 0 && countNewAlerts != 0">
+                            There might be a copyright violation. Please have a look
+                        </p>
+
+                        <p *ngIf="countAlerts != 0 && countNewAlerts != 0">
+                            There might be a copyright violation. Please have a look
+                        </p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/disputes" class="item-link item-link_col" routerLinkActive="active">
+
+                    <div class="item-link__row">
+                        <div class="item-link__leftsite">
+                            <svg class="icons icons_offset-left icons_color icons_arr">
+                                <use xlink:href="assets/images/icons.svg#arr">
+                                </use>
+                            </svg>
+                            <span class="item-text">{{ 'principal.disputes' | translate }}</span>
+                        </div>
+                        <div class="item-link__rightsite">
+                            <span>
+                                <span
+                                    *ngIf="countOpenDisputes == 0 && countActionNeed ==0 && countDisputesResolved == 0">
+                                    {{ countOpenDisputes }}
+                                </span>
+                            <span *ngIf="countOpenDisputes > 0 && countActionNeed ==0 " class="badge rounded badge-neutral">
+                                    {{ countOpenDisputes }}
+                                </span>
+                            <span *ngIf="countActionNeed > 0 && countOpenDisputes ==0 " class="badge rounded badge-error">
+                                    {{ countActionNeed }}
+                                </span>
+                            <span *ngIf="countOpenDisputes > 0 && countActionNeed > 0  " class="badge rounded badge-error">
+                                    {{ countActionNeed }}/{{ countOpenDisputes }}
+                                </span>
+                            <span *ngIf="countDisputesResolved > 0" class="badge rounded badge-success">
+                                    {{ countDisputesResolved }}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="nav-item_descript">
+                        <p *ngIf="countOpenDisputes == 0 && countActionNeed ==0">
+                            {{ 'principal.without_process' | translate }}
+                        </p>
+<!--
+                        <p *ngIf="countOpenDisputes > 0 || countActionNeed > 0">
+                            translate.principal.lbl_7 {{hoursClaim}} translate.principal.lbl_8
+                        </p>
+-->
+                    </div>
+
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="authMaster">
+                <a routerLink="/credits" class="item-link item-link_col" routerLinkActive="active">
+
+                    <div class="item-link__row">
+                        <div class="item-link__leftsite">
+                            <i class="fas fa-dollar-sign icons icons_offset-left icons_color icons_arr"></i>
+                            <span class="item-text">User credits</span>
+                        </div>
+                    </div>
+
+                    <div class="nav-item_descript">
+                        <p>
+                            Change the amount of searches a user can make
+                        </p>
+                    </div>
+
+                </a>
+            </li>
+
+
+        </div>
+        <div class="navbar-wrap__bottom">
+            <li class="nav-item">
+                <a class="item-link" routerLinkActive="active" href="https://sharpshark.io/#faq" target="_blank">
+                    <div class="item-link__row">
+                        <div class="item-link__leftsite">
+                            <i class="icon fa fa-exclamation-circle"></i>
+                            <span class="item-text">{{ 'principal.how_works' | translate }}</span>
+                        </div>
+
+                    </div>
+                </a>
+            </li>
+        </div>
+
+    </ul>
+</div>
+
+
+
+<!-- <div class="horizontal-footer-nav">
+    <div class="navbar-wrap">
+        <a routerLink="/listDraft" class="navbar-wrap__link" routerLinkActive="active">
+            <span class="item-link">
+                <svg class="icons icons_offset-left icons_color icons_burg">
+                    <use xlink:href="assets/images/icons.svg#burg">
+                    </use>
+                </svg>
+                <span class="item-text">translate.principal.lbl_draft</span>
+            </span>
+        </a>
+        <a routerLink="/protected" class="navbar-wrap__link" routerLinkActive="active">
+            <span class="item-link">
+                <svg class="icons icons_offset-left icons_color icons_armom">
+                    <use xlink:href="assets/images/icons.svg#armom">
+                    </use>
+                </svg>
+                <span class="item-text">translate.principal.lbl_protected</span>
+            </span>
+        </a>
+
+        <a routerLink="/draft" class="navbar-wrap__link" routerLinkActive="active">
+            <span class="logo-wrap__btn">
+                <span></span>
+            </span>
+        </a>
+        <a routerLink="/alerts" class="navbar-wrap__link" routerLinkActive="active">
+            <span class="item-link">
+                <i class="icon fa fa-copyright"></i>
+                <span class="item-text">translate.principal.lbl_alert</span>
+            </span>
+        </a>
+        <a routerLink="/dispute" class="navbar-wrap__link" routerLinkActive="active">
+            <span class="item-link">
+                <svg class="icons icons_offset-left icons_color icons_arr">
+                    <use xlink:href="assets/images/icons.svg#arr">
+                    </use>
+                </svg>
+                <span class="item-text">translate.principal.lbl_disputes</span>
+            </span>
+        </a>
+    </div>
+    <div class="navbar-wrap__underline">
+        <span class="line"></span>
+    </div>
+</div> -->
+
+<app-login-select></app-login-select>
+<app-login-email></app-login-email>

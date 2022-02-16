@@ -1,0 +1,236 @@
+<main class="app-main">
+    <div class="main-wrap">
+        <div class="art toggler">
+            <div class="art__row art__row_mob">
+                <div class="art__left-side">
+                    <svg class="icons icons_offset-left icons_color icon_green icons_armom">
+                        <use xlink:href="assets/images/icons.svg#armom">
+                        </use>
+                        <title>
+                            We don’t monitor copyright violations of this document, but will always protect it
+                        </title>
+                        <!-- otro mensaje para cuando es monitoreado -->
+                    </svg>
+
+                    <h2 class="art__title" title="titleh1" *ngIf="documento.titulo">
+                        {{documento.titulo.substring(0, 42)}}<span *ngIf="documento.titulo.length > 42">...</span>
+                    </h2>
+
+                </div>
+                <div class="art__right-side">
+                    <a>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px"
+                             height="18px">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path style="fill:#9FA2B4"
+                                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z">
+                            </path>
+                            <title>titlebtn</title>
+                        </svg>
+                    </a>
+                    <a
+                            (click)="changeStatusMonitoring()"
+                            class="link color_link2 art__resume art__error" title="Stop/Again monitoring">
+                        <span>
+                            <span *ngIf="documento.monitoring">Stop</span> 
+                            <span *ngIf="!documento.monitoring">Again</span> 
+                            monitoring
+                        </span>
+                        <!-- <span *ngIf="!documento.monitoring">
+                            Stop monitoring
+                        </span> -->
+                    </a>
+                    <a *ngIf="!stopTracking"
+                       class="link color_link2 art__resume art__error"
+                       title="Don’t get copyright alerts about this document">
+                        <span>
+                            Again monitoring
+                        </span>
+                    </a>
+
+                    <div class="btn-copy">
+                        <a [routerLink]="['/certificate', documento.uuid]" target="_blank"
+                           class="btn btn-sh-primary color-href link2">
+                            <span>
+                                View certificate
+                            </span>
+                        </a>
+                        <a target="_blank" class="btn btn-sh-primary" data-toggle="tooltip" data-placement="bottom"
+                           title="Copy security plate here">
+                            <img src="assets/images/but-logo.svg" alt="">
+
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <alert></alert>
+            <div *ngIf="false"
+                 class="info info__item info__item_width info__item_close info__item_green info__item_offset-bot">
+                <div class="info__left">
+                    <i class="fas fa-check"></i>
+                    <span>
+                        Success!
+                    </span>
+                    <div class="info__descript">
+                        <p>
+                            We just protected this document. We’re monitoring its fair use and will let you know about
+                            any cases.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="info__button">
+                    <button (click)="showModalL()" class="btn-sh-primary">Add safe websites</button>
+                    <a href="#" class="art__resume"></a>
+                </div>
+                <a class="info-close">
+                </a>
+            </div>
+
+
+            <div class="art__buttons ">
+                <div class="art__buttons_wrap">
+                    <div class="art__buttons_left">
+                        <sh-filter-tab
+                                [value]="ProtectedDocumentType.Content"
+                                [active]="selectedType === ProtectedDocumentType.Content"
+                                (selected)="selectType($event)"
+                        >
+                            Content
+                        </sh-filter-tab>
+                        <sh-filter-tab
+                                [value]="ProtectedDocumentType.About"
+                                [active]="selectedType === ProtectedDocumentType.About"
+                                (selected)="selectType($event)"
+                        >
+                            About
+                        </sh-filter-tab>
+                        <!-- <a (click)="steps(3)" [ngClass]="{ 'badge-primary': step==3, 'badge-dark': step!=3}" class="badge">
+                            copyright ({{countAlerts}})
+                        </a>
+                        <a (click)="steps(4)" [ngClass]="{ 'badge-primary': step==3, 'badge-dark': step!=3}" class="badge">
+                            disputes
+                        </a> -->
+                    </div>
+
+                    <div class="art__buttons_right">
+                        <a class="info-wrap toggler-trigger">
+                            <svg class="icons  icons_open-qest">
+                                <use xlink:href="assets/images/icons.svg#open-qest">
+                                </use>
+                            </svg>
+                            <div class="arrow"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="toggler__content">
+                <div class="art__content">
+                    <div class="info info__item info__item_width info__item_blue">
+                        <div class="info__left">
+                            <i class="info-circle"></i>
+                            <span>
+                                titleToogle
+                            </span>
+                            <div class="info__descript">
+                                <p>
+                                    infoToggle
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-container [ngSwitch]="selectedType">
+
+            <div *ngSwitchCase="ProtectedDocumentType.Content" class="card mb-0 card-offset card-spase">
+                <div class="content-wrapper content-wrapper-dark">
+                    <div class="scroll-content-y overflow-auto">
+                        <div class="contenido" [innerHTML]="htmlContent"></div>
+                    </div>
+                </div>
+                <div class="card__bottom-line card__bottom-line_spase">
+
+                    <div class="card-wrapper">
+                        <div class="btn-wrap">
+<!--
+                        <span>
+                            msgFooter
+                        </span>
+-->
+                        </div>
+                        <div class="card__bottom-line_right">
+                            <a href="#" class="linked-pos">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px"
+                                     height="18px">
+                                    <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                    <path style="fill:#9FA2B4"
+                                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z">
+                                    </path>
+                                </svg>
+
+                                <div class="links-masked">
+                                    <div class="link-masked__content">
+                                        <p>
+                                            You can add an updated version of this document
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </a>
+                            <span class="card__bottom-line_desc">
+                            v.{{documento.version}}
+                        </span>
+
+                            <button [routerLink]="['/draft', documento.uuid]" class="btn-white btn-block btn-table ">
+                                Update this version
+                            </button>
+
+
+                            <button *ngIf="ShowBtn == true" (click)="showPass()" class="btn-white btn-block btn-table ">
+                                View
+                                Protected Password
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <app-document-about
+                    *ngSwitchCase="ProtectedDocumentType.About"
+                    [stoptracking]="stopTracking"
+                    [datasets]="[documento]"
+            ></app-document-about>
+            <!--
+            <app-document-alert *ngIf="step==3" [idDocument]="id"></app-document-alert>
+            <app-document-dispute *ngIf="step==4" [idDocument]="id"></app-document-dispute>
+        -->
+        </ng-container>
+        <app-modal-safe-list></app-modal-safe-list>
+    </div>
+</main>
+
+<div class="modal fade " id="ShowProct" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div style="padding: 32px;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+                <div class="row justify-content-center">
+
+                    <span>codeProc</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

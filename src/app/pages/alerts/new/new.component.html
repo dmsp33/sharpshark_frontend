@@ -1,0 +1,58 @@
+  <div class="card mb-0 card-offset card-scroll card-spase">
+    <table id="dinamicData" class="table table-mob-alert" style="min-height: 100%">
+
+        <thead class="table-head">
+          <tr>
+            <th> {{'table.your_document_title' | translate }}</th>
+            <th> {{'table.appeared_on' | translate }}</th>
+            <th> {{'table.discovered' | translate }}</th>
+          </tr>
+        </thead>
+  
+  
+        <tbody class="table-body">
+          <tr class="table-row table-row_border-none" *ngIf="totalAlerts == 0">
+            <td class="row-item row-over">
+              <p>
+                {{'table.this_a_blank_page' | translate}}
+              </p>
+            </td>
+            <td class="row-item"></td>
+            <td class="row-item dropdown"></td>
+          </tr>
+          <tr class="table-row table-black" *ngIf="totalAlerts==1">
+            <td class="row-item" colspan="3">
+              <div class="row-item__center">
+                <p>
+                  Is this case a violation? If yes, we can call for the website owner to remove/pay for it
+                </p>
+              </div>
+            </td>
+          </tr>
+          <tr class="table-row table-black" *ngIf="totalAlerts>1">
+            <td class="row-item" colspan="3">
+              <div class="row-item__center">
+                <p>
+                  Are these cases violations? If yes, we can call for the website owner to remove/pay for it
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Today  -->
+          <alert-group-by-date [data]="dataToday" [group]="'today'" (changeStatus)="changeActualStatus($event)"></alert-group-by-date>
+
+          <!-- Earlier this week  -->
+          <alert-group-by-date [data]="dataWeek"  [group]="'week'" (changeStatus)="changeActualStatus($event)"></alert-group-by-date>
+
+          <!-- Earlier this month  -->
+          <alert-group-by-date [data]="dataMonth" [group]="'month'" (changeStatus)="changeActualStatus($event)"></alert-group-by-date>
+
+          <!-- Even Earlier   -->
+          <alert-group-by-date [data]="dataEvenEarlier" [group]="'even_earlier'" (changeStatus)="changeActualStatus($event)"></alert-group-by-date>
+
+          
+        </tbody>
+      </table>
+    </div>
+  <!-- <app-modal-safelist [idDocument]="idDocument"></app-modal-safelist> -->

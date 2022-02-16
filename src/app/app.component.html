@@ -1,0 +1,38 @@
+<div [ngClass]="{'page': !hasFullView}">
+  <div [ngClass]="{'app-container': !hasFullView}">
+      <block-ui> </block-ui>
+      <app-header *ngIf="!hasFullView"> </app-header>
+      <app-vertical-nav *ngIf="!hasFullView"></app-vertical-nav>
+      <div class="{{!hasFullView ? 'body-container' : ''}}">
+          <router-outlet></router-outlet>
+      </div>
+  </div>
+
+  <div *ngIf="!hasFullView" class="mobile-container">
+      <div class="mobile-horizontal">
+
+      </div>
+
+      <div class="mobile-content">
+          <div class="mob-img">
+              <img src="assets/images/smaills.svg" alt="">
+          </div>
+          <div class="plant-img">
+              <img src="assets/images/plansh.svg" alt="">
+          </div>
+          <div class="mobile-content__descript">
+              <span>
+                  Please rotate you tablet horizontally
+              </span>
+
+              <p>
+                  Aww, sorry, we don’t support mobile yet.
+              </p>
+              <p>
+                  Please enjoy Shark on your desktop or table for now
+              </p>
+          </div>
+      </div>
+  </div>
+</div>
+<sh-toast-action-result></sh-toast-action-result>

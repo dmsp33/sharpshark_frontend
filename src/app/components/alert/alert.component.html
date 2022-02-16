@@ -1,0 +1,9 @@
+<div *ngIf="alerts">
+    <div *ngFor="let alert of alerts" class="{{cssClass(alert)}}" role="alert">
+        <div class="info__left">
+            <i class="info-circle"></i>
+            <span [innerHTML]="alert.message">
+            </span>
+        </div>
+    </div>
+</div>

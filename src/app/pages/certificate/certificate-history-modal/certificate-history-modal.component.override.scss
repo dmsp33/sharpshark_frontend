@@ -1,0 +1,19 @@
+@import '@imports/variables';
+
+$thumb-track-width: 4px;
+$thumb-track: $highlight-faded-color;
+$thumb-color: $base-font-color-invert;
+$thumb-hover-color: #938fff;
+
+.certificate-history-modal {
+  &__other-versions-scroll-container {
+    --scrollbar-size: #{$thumb-track-width} !important;
+    --scrollbar-thumb-color: #{$thumb-color} !important;
+    --scrollbar-thumb-hover-color: #{$thumb-hover-color} !important;
+    --scrollbar-track-color: #{transparentize($thumb-track, 0.4)} !important;
+
+    .scrollbar-control {
+      right: -15px !important;
+    }
+  }
+}

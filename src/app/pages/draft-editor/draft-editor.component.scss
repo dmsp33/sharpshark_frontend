@@ -1,0 +1,141 @@
+.modal-content .close {
+    /* background-repeat: no-repeat;
+      background-size: cover; */
+    background: none;
+    font-size: 1rem;
+    z-index: 1;
+    font-weight: normal !important;
+  }
+  
+  .modal-content .close {
+    right: 14px !important;
+    top: 14px;
+  }
+  
+  .header {
+    margin-top: 100px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .html-header {
+    margin: 15px 0 5px;
+  }
+  
+  .html {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+    background-color: #f1f1f1;
+    min-height: 20px;
+    max-height: 10rem;
+    overflow: auto;
+  }
+  
+  #mediumEditor {
+    height: 100%;
+    margin: 10px;
+    padding: 5px;
+  }
+  
+  .placeholder-personalizado h2 {
+    color: #979CBC;
+    margin-bottom: 0 !important;
+  }
+  
+  .placeholder-personalizado p {
+    color: #979CBC;
+    margin-top: 15px !important;
+  }
+  
+  #hideMe {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes cssAnimation {
+    to {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+  }
+  
+  @-webkit-keyframes cssAnimation {
+    to {
+      width: 0;
+      height: 0;
+      visibility: hidden;
+    }
+  }
+  
+  .estatus-chip-advertencia {
+    background-color: #FFC933 !important;
+    color: black !important;
+  }
+  
+  .estatus-chip-natural {
+    background-color: #979CBC !important;
+    color: white !important;
+  }
+  
+  .icono-natural {
+    color: #979CBC !important;
+  }
+  
+  .info__button {
+    min-width: 50%;
+  }
+  
+  .modal .modal-dialog .modal-content {
+    width: inherit !important;
+  }
+  
+  .modal-body {
+    overflow-x: auto;
+  }
+  
+  .input-titulo {
+    font-family: "SuisseIntl", sans-serif;
+    font-weight: 700;
+    color: #000;
+    min-width: 100%;
+    border: none !important;
+    min-height: 4rem;
+    padding: 24px 16px;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  
+  .input-titulo::placeholder {
+    font-weight: 700;
+    color: #666892;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  
+  .input-titulo:focus {
+    outline: none !important;
+  }
+  
+  .input-cuerpo {
+    min-width: 100%;
+    min-height: calc(100% - 4rem);
+    border: none !important;
+    padding: 4px 16px;
+  }
+  
+  .input-cuerpo::placeholder {
+    color: #666892;
+  }
+  
+  .input-cuerpo:focus {
+    outline: none !important;
+  }

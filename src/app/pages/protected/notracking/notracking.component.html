@@ -1,0 +1,36 @@
+<div class="card mb-0 card-offset card-scroll card-spase">
+
+    <table class="table table-mob-alert overflow-auto">
+      <thead class="table-head">
+        <tr>
+            <th>TITLE </th>
+            <th>NOT TRACKING, since</th>
+            <th>PROTECTED/UPDATED</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        <tr *ngIf="documentsToday.length == 0 && documentsWeek.length == 0 && documentsMonth.length == 0 
+        && documentsEvenEarlier.length  == 0" class="table-row table-row_border-none">
+          <td class="row-item row-over">
+            <p>This is a blank page... Cases will appear here </p>
+          </td>
+          <td class="row-item"></td>
+          <td class="row-item dropdown"></td>
+        </tr>
+
+        <!-- Today  -->
+        <protected-not-tracking-group-by-date [data]="documentsToday" [group]="'today'" (changeStatus)="changeStatusMonitoring($event)"></protected-not-tracking-group-by-date>
+        
+        <!-- Earlier this week  -->
+        <protected-not-tracking-group-by-date [data]="documentsWeek" [group]="'week'" (changeStatus)="changeStatusMonitoring($event)"></protected-not-tracking-group-by-date>
+
+        <!-- Earlier this month  -->
+        <protected-not-tracking-group-by-date [data]="documentsMonth" [group]="'month'" (changeStatus)="changeStatusMonitoring($event)"></protected-not-tracking-group-by-date>
+
+        <!-- Even Earlier  -->
+        <protected-not-tracking-group-by-date [data]="documentsEvenEarlier" [group]="'even_earlier'" (changeStatus)="changeStatusMonitoring($event)"></protected-not-tracking-group-by-date>
+                    
+      </tbody>
+    </table>
+  
+  </div>

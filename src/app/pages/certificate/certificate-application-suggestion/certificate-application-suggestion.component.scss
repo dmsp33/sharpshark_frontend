@@ -1,0 +1,14 @@
+@import '@imports/variables';
+
+.certificate-application-suggestion {
+  display: inline-block;
+  background: $light-blue-color;
+  border-radius: 2px;
+  padding: 6px 12px;
+
+  &__text,
+  &__link {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}

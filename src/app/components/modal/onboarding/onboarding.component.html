@@ -1,0 +1,137 @@
+<div class="modal fade " id="onboardingModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-transparent">
+            <div *ngIf="AcceptTerms == true" class="alert info info__item info__item_yellow mb-2 w-25 mx-auto">
+                <div class="d-flex ml-0 align-items-center">
+                    <i class="info-circle"></i>
+                    <span>Please, accept the terms on the last step</span>
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="alert alert-clickOutside info info__item info__item_yellow mb-2 w-25 mx-auto">
+                <div class="d-flex ml-0 align-items-center">
+                    <span>Please, click through the welcome popup</span>
+
+                    <button type="button" class="close" (click)="hideAlertClickOut()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+
+            <div [ngSwitch]="step" class="modal-s__container">
+                <div *ngSwitchCase="OnboardingType.FirstStep" class="modal-s__desc">
+                    <h2 style="font-weight: bold;">
+                        Welcome to
+                    </h2>
+                    <img src="assets/images/sharp-l.svg" alt="">
+                    <div class="modal-s__subtitle">
+                        <p>
+                            SharpShark helps to protect original content, monitor its misuse, and resolve disputes
+                        </p>
+                    </div>
+                    <img class="rounded-circle mx-auto" alt="200x200" src="assets/images/grouplogo.png"
+                         data-holder-rendered="true">
+                </div>
+                <div *ngSwitchCase="OnboardingType.SecondStep" class="modal-s__desc ">
+                    <h2 style="font-weight: bold;">
+
+                        Protect with
+
+                    </h2>
+                    <img src="assets/images/sharp-l.svg" alt="">
+                    <div class="modal-s__subtitle">
+                        <p>
+                            You can receive a digital certificate that will exist forever and can serve as proof of your
+                            authorship
+                        </p>
+                    </div>
+                    <img class="mx-auto" alt="200x200" src="assets/images/Certificate.png" data-holder-rendered="true">
+                </div>
+                <div *ngSwitchCase="OnboardingType.ThirdStep" class="modal-s__desc ">
+                    <h2 style="font-weight: bold;">
+
+                        Detect with
+
+                    </h2>
+                    <img src="assets/images/sharp-l.svg" alt="">
+                    <div class="modal-s__subtitle">
+                        <p>
+                            SharpShark will monitor the internet, and you’ll get an alert if your content is illegally
+                            republished without permission.
+                        </p>
+                    </div>
+                    <img class="mx-auto" alt="200x200" src="assets/images/Newalert.png" data-holder-rendered="true">
+                </div>
+                <div *ngSwitchCase="OnboardingType.FourthStep" class="modal-s__desc ">
+                    <h2 style="font-weight: bold;">
+
+                        Reject with
+
+                    </h2>
+                    <img src="assets/images/sharp-l.svg" alt="">
+                    <div class="modal-s__subtitle">
+                        <p>
+                            If there’s a violation and you decide to deal with it, the system will find their contacts,
+                            generate a claim, and send it to them.
+                        </p>
+                    </div>
+
+                    <div class="modal-s-slider__item">
+                        <div class="join-form">
+                            <div class="custom-control custom-checkbox">
+                                <input (change)="changeAcceptTerms()" type="checkbox" class="custom-control-input"
+                                       id="acceptTerms">
+                                <label class="custom-control-label" for="acceptTerms">
+                                    I have comprehensively read the <a href="#" class="terms">Terms and conditions</a>
+                                    and I agree with them entirely
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-s__underlist">
+                    <div class="modal-s__dots">
+                        <input [(ngModel)]="step" [value]="OnboardingType.FirstStep" class="radio-sh" type="radio">
+                        <input [(ngModel)]="step" [value]="OnboardingType.SecondStep" class="radio-sh" type="radio">
+                        <input [(ngModel)]="step" [value]="OnboardingType.ThirdStep" class="radio-sh" type="radio">
+                        <input [(ngModel)]="step" [value]="OnboardingType.FourthStep" class="radio-sh" type="radio">
+                    </div>
+
+                    <div class="moda-s__next">
+                        <a *ngIf="step === OnboardingType.FirstStep" (click)="switchView(OnboardingType.SecondStep)"
+                           class="btn-sh btn-sh-primary">
+                            <span>
+                                Got it
+                            </span>
+                        </a>
+                        <a *ngIf="step === OnboardingType.SecondStep" (click)="switchView(OnboardingType.ThirdStep)"
+                           class="btn-sh btn-sh-primary">
+                            <span>
+                                All clear
+                            </span>
+                        </a>
+                        <a *ngIf="step === OnboardingType.ThirdStep" (click)="switchView(OnboardingType.FourthStep)"
+                           class="btn-sh btn-sh-primary">
+                            <span>
+                                Nice
+                            </span>
+                        </a>
+                        <a *ngIf="step === OnboardingType.FourthStep" (click)="hideModal()"
+                           [ngClass]="{ 'disabled': !disabled }"
+                           class="btn-sh btn-sh-primary">
+                            <span>
+                                Dive into Shark!
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

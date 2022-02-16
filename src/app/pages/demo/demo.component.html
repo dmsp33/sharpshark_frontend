@@ -1,0 +1,129 @@
+<main class="app-main">
+    <div class="main-wrap">
+
+        <div class="art toggler">
+            <div class="art__row">
+                <div class="art__left-side">
+                    <a class="new-draft-popover">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path style="fill:#9FA2B4"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z">
+                            </path>
+                        </svg>
+                        <div class="new-draft-content">
+                            <div class="link-masked__content">
+                                <p>Drafts aren’t protected or published</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <h1 class="art__title text-truncate">
+                        <!-- Happy to see you! It’s your sample draft -->
+                        {{ 'demo.happy_to_see_you' | translate }}
+                    </h1>
+                </div>
+                <div class="art__right-side">
+                    <button class="art__close" type="button" data-toggle="modal" data-target="#loginTo">
+                        <!-- Save & close  -->
+                        {{ 'demo.btn_save_close' | translate }}
+                    </button>
+                    <button class="btn btn-sh-primary" type="button" data-toggle="modal" data-target="#loginTo">
+                        <!-- Protect  -->
+                        {{ 'demo.btn_protect' | translate }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="card mb-0 card-offset card-spase card-reload overflow-auto mb-100">
+                <div class="content-wrapper thisthing" style="height: calc(100% - 1em) !important;" contenteditable="true">
+
+                    <h2 class="title-draft color" data-toggle="tooltip" data-placement="left" title="It’s the title of your draft">
+                        <span class="padding demo-background">
+                            Time Machine
+                        </span>
+                    </h2>
+                    <p class="color tooltip-rosa" style="font-size: 1.5em; padding-left: 11px;">
+                        <strong>Chapter I. The Inventor</strong>
+                    </p>
+
+                    <div class="blockquote">
+                        <i class="fas fa-quote-right"></i>
+                        <div>
+                            Fool! All that is at all <br>
+                            Lasts ever past recall.
+                        </div>
+                    </div>
+                    <div class="blockquote">
+                        <i class="fas fa-copyright"></i>
+                        <div>R. Browning</div>
+                    </div>
+
+                    <p class="parrafo color padding demo-background" contenteditable="true" data-toggle="tooltip" data-placement="left" title="This is the body text">
+                        The man who made the Time Machine — the man I shall call the Time Traveler — was well known in scientific circles a few years since, and the fact of his disappearance is also well known. He was a mathematician of peculiar subtlety, and one of our most
+                        conspicuous investigators in molecular physics. He did not confine himself to abstract science. Several ingenious, and one or two profitable, patents were his: very profitable they were, these last, as his handsome house at Richmond
+                        testified. To those who were his intimates, however, his scientific investigations were as nothing to his gift of speech. In the after-dinner hours he was ever a vivid and variegated talker, and at times his fantastic, often paradoxical,
+                        conceptions came so thick and close as to form one continuous discourse.
+                    </p>
+                    <p class="parrafo color padding ">
+                        <mark>
+                            At these times he was as unlike the popular conception of a scientific investigator as a man
+                            could be.
+                        </mark><br><br> His cheeks would flush, his eyes grow bright; and the stranger the ideas that sprang and crowded in his brain, the happier and the more animated would be his exposition.<br>
+                        <br> Up to the last there was held at his house a kind of informal gathering, which it was my privilege to attend, and where, at one time or another, I have met most of our distinguished literary and scientific men. There was a
+                        plain dinner at seven. After that we would adjourn to a room of easy-chairs and little tables, and there, with libations of alcohol and reeking pipes, we would invoke the god. At first the conversation was mere fragmentary chatter,
+                        with some local lacunæ of digestive silence; but toward nine or half-past nine, if the god was favorable, some particular topic would triumph by a kind of natural selection, and would become the common interest. So it was, I remember,
+                        on the last Thursday but one of all—the Thursday when I first heard of the Time Machine.<br>
+                        <br> I had been jammed in a corner with a gentleman who shall be disguised as Filby. He had been running down Milton—the public neglects poor Filby's little verses shockingly; and as I could think of nothing but the relative status
+                        of Filby and the man he criticised, and was much too timid to discuss that, the arrival of that moment of fusion, when our several conversations were suddenly merged into a general discussion, was a great relief to me.<br>
+                        <br> "What's that is nonsense?" said a well-known Medical Man, speaking across Filby to the Psychologist.
+                        <br>
+                        <br> "He thinks," said the Psychologist, "that Time's only a kind of Space."<br>
+                        <br> "It's not thinking," said the Time Traveler; "it's knowledge."
+                    </p>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade " id="loginTo" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div style="padding: 32px;">
+
+                <h1 class="font-weight-bold">
+                    <!-- Ah, unfortunately, you can’t protect docs in the demo app -->
+                    {{'demo.unfortunately_cant_protect_doc'|translate}}
+                </h1>
+                <p class="text-muted" style="margin-top: 28px;">
+                    <!-- If you want to protect your document, receive an immutable certificate, and have your content monitored, you need to sign up/sign in. -->
+                    {{'demo.want_to_protect'|translate}}
+                </p>
+
+                <p class="text-muted">
+                    <!-- If you want to see how our protection works, you may protect our already prepared draft.  -->
+                    {{'demo.want_to_see'|translate}}
+                </p>
+
+                <p class="text-muted">
+                    <!-- And if you really like Shark, we’ll be happy to have you on board! -->
+                    {{'demo.like_shark'|translate}}
+                </p>
+
+                <button class="btn btn-sh-primary btn-block mt-4" data-dismiss="modal" (click)="showModalL()">
+                    <!-- Sign up or Sign in -->
+                    {{'demo.btn_sign_up_sign_in'| translate}}
+                </button>
+                <button class="btn btn-block" style="border: 1px solid #4700E5; box-sizing: border-box; border-radius: 4px; color: #4700E5; box-shadow: none; margin-top: 16px;" data-dismiss="modal">
+                    <!-- Continue to demo -->
+                    {{'demo.btn_continue_demo'|translate}}
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</div>

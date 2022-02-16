@@ -1,0 +1,28 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+@mixin underline($underline-offset: 1px) {
+  text-decoration: underline;
+  text-underline-offset: $underline-offset;
+}
+
+@mixin font-desktop($font-size: 18px, $line-height: 20px) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+@mixin font-mobile($font-size: 15px, $line-height: 16px, $include-breakpoint: true) {
+  @if $include-breakpoint {
+    @include media-breakpoint-down(sm) {
+      @include font-desktop(15px, 16px);
+    }
+  } @else {
+    @include font-desktop(15px, 16px);
+  }
+}
+
+u {
+  @include underline();
+  cursor: default;
+}

@@ -1,0 +1,332 @@
+<main class="app-main">
+    <div class="main-wrap">
+
+        <div class="art toggler">
+            <div class="art__row">
+                <div class="art__left-side">
+                    <a class="new-draft-popover">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path style="fill:#9FA2B4"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.5.51-.86.97-1.04 1.69-.08.32-.13.68-.13 1.14h-2v-.5c0-.46.08-.9.22-1.31.2-.58.53-1.1.95-1.52l1.24-1.26c.46-.44.68-1.1.55-1.8-.13-.72-.69-1.33-1.39-1.53-1.11-.31-2.14.32-2.47 1.27-.12.37-.43.65-.82.65h-.3C8.4 9 8 8.44 8.16 7.88c.43-1.47 1.68-2.59 3.23-2.83 1.52-.24 2.97.55 3.87 1.8 1.18 1.63.83 3.38-.19 4.4z">
+                            </path>
+                        </svg>
+                        <div class="new-draft-content">
+                            <div class="link-masked__content">
+                                <p>Drafts aren’t protected or published</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <span *ngIf="document && document.id && document.version" class="art__left-desc">v.{{document.version}}</span>
+
+                    <h1 class="art__title text-truncate">New draft </h1>
+
+                    <div *ngIf="msgSaved" class="art__load" [ngClass]="msgClass" role="alert">
+                        {{msgSaved}}
+                    </div>
+
+                </div>
+                <div class="art__right-side">
+                    <button class="art__close" type="button" data-toggle="tooltip" 
+                        title="{{'draft-editor.btn_title_save_close'|translate}}" 
+                        [disabled]="accionando" [ngClass]="{'disabled': accionando}" (click)="saveDoc();">
+                        Save & close
+                    </button>
+                    <button class="btn btn-sh-primary btn-4px" type="button" data-toggle="tooltip"
+                        title="{{'draft-editor.btn_title_protect'|translate}}" 
+                        [disabled]="accionando" 
+                        [ngClass]="{'disabled': accionando}" (click)="switchViewProtected(1)">
+                        Protect  ...
+                    </button>
+                </div>
+            </div>
+            <alert></alert>
+            <div *ngIf="!document && !accionando" class="info info__item info__item_width info__item_blue info__item_offset-b">
+                <div class="info__left">
+                    <i class="info-circle"></i>
+                    <span>
+                        Create your document
+                    </span>
+                    <div class="info__descript">
+                        <p>
+                            After you can protect it as locked or unlocked. See examples
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngIf="protectedStep == 1" class="info info__item info__item_width info__item_blue info__item_offset-b">
+                <div class="info__left">
+                    <i class="info-circle"></i>
+                    <span>
+                        What blockchain do you choose?
+                    </span>
+                    <div class="info__descript">
+                        <p>
+                            You can choose what blockchain your assets will be saved in and operated by (it won’t affect the essential features of the evidence or the price)
+                        </p>
+                    </div>
+                </div>
+                <div class="info__button">
+                    <button class="btn btn-primary btn-block btn-4px" (click)="setBlockchain('symbol')">
+                        Symbol from NEM
+                    </button>
+                    <button class="boton_marco_azul" style="margin-left: 12px;" (click)="setBlockchain('binance')">
+                        Binance Smart Chain
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="protectedStep == 2" class="info info__item info__item_width info__item_blue info__item_offset-b">
+                <div class="info__left">
+                    <i class="info-circle"></i>
+                    <span>
+                        Lock or not?
+                    </span>
+                    <div class="info__descript">
+                        <p>
+                            Unlocked document is public. Locked document is password-protected. Both are protected.
+                            <br> You can always unlock any document. See examples
+                        </p>
+                    </div>
+                </div>
+                <div class="info__button">
+                    <button class="btn btn-primary btn-block btn-4px" (click)="setLocked(false)">Unlocked mode </button>
+                    <button class="boton_marco_azul" style="margin-left: 12px;" (click)="setLocked(true)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"
+                            style="margin-top: -4px;">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                        </svg>
+                        Locked mode 
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="protectedStep == 3" class="info info__item info__item_width info__item_blue info__item_offset-b">
+                <div class="info__left">
+                    <i class="info-circle"></i>
+                    <span>
+                        Protect this document?
+                    </span>
+                    <div class="info__descript">
+                        <p>
+                            For this document, we will publish it (like an e-book) under your name in an open database. We will also create a digital certificate for you and start monitoring the content for plagiarism.
+                        </p>
+                    </div>
+                </div>
+                <div class="info__check">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="hellothere" [checked]="permitirPublicarDraft" (change)="permitirPublicarDraft = !permitirPublicarDraft">
+                        <label class="custom-control-label" for="hellothere">
+                            I’m okay with it going into public databases
+                            <a href="https://sharpshark.io/#faq" target="_blank">
+                                (Read more) </a>
+                        </label>
+                    </div>
+                </div>
+                <div class="info__button">
+                    <button class="btn btn-primary btn-block btn-4px" [disabled]="!permitirPublicarDraft" (click)="protectedDoc()">Protect </button>
+                    <div class="btn btn-transparent btn-block" (click)="CancelDataProtect()">No, leave as a draft</div>
+                </div>
+            </div>
+            <div *ngIf="mostrarErrorDeProteccion" class="info info__item info__item_width info__item_red info__item_offset-bot">
+                <div class="info__left">
+                    <i class="info-circle"></i>
+                    <span>
+                        Ah, we can’t protect this document
+                    </span>
+                    <div class="info__descript">
+                        <p>
+                            Seems it was already published somewhere (<a href="#" data-toggle="modal" data-target="#linksViolaciones">see the links</a>).<br> SharpShark protects only never-before-published content
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="linksViolaciones" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="modal-header">
+                            <h5 class="modal-title">Websites where we found this quote</h5>
+                            <div class="modal__subtitle">
+                                <p>The quote “Some small portion of the quote, just several symbols from that...” you want to use has appeared on the following websites. To use it, please, add a link to any website from the list</p>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <table class="table table-responsive table-condensed" style="max-width: 760px !important;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="max-width: 50px !important;" class="text-uppercase">
+                                                %
+                                            </th>
+                                            <th scope="col" style="max-width: 380px !important;" class="text-uppercase">
+                                                title
+                                            </th>
+                                            <th scope="col" style="max-width: 380px !important;" class="text-uppercase">
+                                                URL
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let plagio of plagios">
+                                            <td class="text-truncate">
+                                                <p class="text-truncate" style="max-width: 50px !important;">
+                                                    <strong>{{plagio.percentage}}</strong>
+                                                </p>
+                                            </td>
+                                            <td class="text-truncate">
+                                                <p class="text-truncate" style="max-width: 380px !important;">
+                                                    <strong>{{plagio.title}}</strong> {{plagio.introduction}}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-truncate" style="max-width: 380px !important;">
+                                                    <a [attr.href]="plagio.url" target="_blank">{{plagio.url}}</a></p>
+                                            </td>
+                                            <td>
+                                                <button class="btn">
+                                                    <i class="far fa-copy"></i>
+                                                    Copy
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let plagio of plagios">
+                                            <td class="text-truncate">
+                                                <p class="text-truncate" style="max-width: 50px !important;">
+                                                    <strong>{{plagio.percentage}}</strong>
+                                                </p>
+                                            </td>
+                                            <td class="text-truncate">
+                                                <p class="text-truncate" style="max-width: 380px !important;">
+                                                    <strong>{{plagio.title}}</strong> {{plagio.snippet}}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-truncate" style="max-width: 380px !important;">
+						    <a [attr.href]="plagio.link" target="_blank">{{plagio.link}}</a></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="mostrarMensajeExitoso" role="alert" class="info info__item info__item_width info__item_green info__item_offset-bot">
+                <div class="info__left">
+                    <i class="fas fa-check"></i>
+                    <span>
+                        draft.draft_prot3'
+                    </span>
+                    <div class="info__descript">
+                        <p>
+                            draft.draft_prot4'
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div *ngIf="mostrarErrorDeDatos" role="alert" class="info info__item info__item_width info__item_red info__item_offset-bot">
+                <div class="info__left">
+                    <i class="info-circle"></i>
+                    <span>
+                        draft.draft_prot5' 
+                    </span>
+                    <div class="info__descript">
+                        <p>
+                            draft.draft_prot6'
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <app-editor [(data)]="editorData"></app-editor>
+        {{document.id}} {{document.version}}
+
+        <div class="card mb-0 card-offset card-spase card-reload d-none">
+            <div *ngIf="mostrarComprobadoOriginalidad && blockUiColor == 'morado'" class="card-mask">
+                <img src="assets/images/check-b.svg" alt="">
+                <div class="card-mask__desc" [innerHTML]="alertaProcesoMensaje">
+                </div>
+            </div>
+            <div *ngIf="mostrarComprobadoOriginalidad && blockUiColor == 'verde'" class="card-mask card-mask_green">
+                <div class="circle-check">
+                    <img src="assets/images/safaf.svg" alt="">
+                </div>
+                <div class="card-mask__desc" [innerHTML]="alertaProcesoMensaje">
+                </div>
+            </div>
+
+            <!-- placeholder before editor -->
+            <div class="content-wrapper">
+                <div>
+                    <h2>Happy to see you</h2>
+                    <p>
+                        It's your workspace. Type or paste (Ctrl + V) your content here
+                    </p>
+                    <small>Se debería ocultar este "placeholder" al hacer click</small>
+                </div>
+                <div>
+                    <input id="carga_de_Archivo_id" type="file" style="display:none">
+                    <!-- <input id="carga_de_Archivo_id" type="file" style="display:none" (change)="cargarArchivo($event.target.files)"> -->
+                    <p> &nbsp; <br> Or
+                        <a style="cursor: pointer;">
+                            <span>upload a document</span> </a> — doc, docx, rtf, txt, pdf with text are all good.
+                    </p>
+                </div>
+            </div>
+
+            <!-- editor -->
+            <div class="content-wrapper">
+                <input class="input-titulo" type="text" placeholder="Happy to see you">
+                <textarea class="input-cuerpo" placeholder="It's your workspace. Type or paste (Ctrl + V) your content here" style="resize:none"></textarea>
+            </div>
+
+            <!-- carga de datos al editor -->
+            <div class="content-wrapper">
+                <div class="timeline-wrapper">
+                    <div class="timeline-item">
+                        <div class="animated-background">
+                            <div class="background-masker header-right"></div>
+                            <div class="background-masker header-bottom"></div>
+                            <div class="background-masker subheader-right"></div>
+                            <div class="background-masker subheader-bottom"></div>
+                            <div class="background-masker content-four-line"></div>
+                            <div class="background-masker content-four-end"></div>
+                            <div class="background-masker content-first-end"></div>
+                            <div class="background-masker content-second-line"></div>
+                            <div class="background-masker content-second-end"></div>
+                            <div class="background-masker content-third-line"></div>
+                            <div class="background-masker content-third-end"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div *ngIf="errorArchivo" class="content-wrapper">
+                <div>
+                    <h2 (click)="ocultarPlaceholder()"> Something went wrong</h2>
+                    <p>
+                        <span (click)="ocultarPlaceholder()"> .draft.lbl_edit_try_to' 
+                        </span>
+                        <a (click)="buscarArchivo()" style="cursor: pointer;">
+                            <span>.draft.lbl_edit_upload_new_one' </span>
+                        </a>,
+                        <span (click)="ocultarPlaceholder()">{{pcOMac(true) </span>
+                    </p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</main>
